@@ -9,7 +9,7 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
         int N = Integer.parseInt(br.readLine());
-        //dp¸¦ 1ºÎÅÍ ¹Ş´ÂÀÌÀ¯´Â 0À¸·Î ¹ŞÀ¸¸é ·±Å¸ÀÓ¿¡·¯¿¡ Ãë¾àÇÏ´Ï ÆíÀÇ»ó 1ºÎÅÍ¹ŞÀ½
+        //dpë¥¼ 1ë¶€í„° ë°›ëŠ”ì´ìœ ëŠ” 0ìœ¼ë¡œ ë°›ìœ¼ë©´ ëŸ°íƒ€ì„ì—ëŸ¬ì— ì·¨ì•½í•˜ë‹ˆ í¸ì˜ìƒ 1ë¶€í„°ë°›ìŒ
         int[] arr = new int[N + 1];
         int[] dp = new int[N + 1];
 
