@@ -2,10 +2,10 @@ import java.util.*;
 
 public class Main {
 
-    // µµ½ÃÀÇ °³¼ö, µµ·ÎÀÇ °³¼ö, °Å¸® Á¤º¸, Ãâ¹ß µµ½Ã ¹øÈ£
+    // ë„ì‹œì˜ ê°œìˆ˜, ë„ë¡œì˜ ê°œìˆ˜, ê±°ë¦¬ ì •ë³´, ì¶œë°œ ë„ì‹œ ë²ˆí˜¸
     public static int n, m, k, x;
     public static ArrayList<ArrayList<Integer>> graph = new ArrayList<ArrayList<Integer>>();
-    // ¸ğµç µµ½Ã¿¡ ´ëÇÑ ÃÖ´Ü °Å¸® ÃÊ±âÈ­
+    // ëª¨ë“  ë„ì‹œì— ëŒ€í•œ ìµœë‹¨ ê±°ë¦¬ ì´ˆê¸°í™”
     public static int[] d = new int[300001];
 
     public static void main(String[] args) {
@@ -16,40 +16,40 @@ public class Main {
         k = sc.nextInt();
         x = sc.nextInt();
 
-        // ±×·¡ÇÇ ¹× ÃÖ´Ü °Å¸® Å×ÀÌºí ÃÊ±âÈ­
+        // ê·¸ë˜í”¼ ë° ìµœë‹¨ ê±°ë¦¬ í…Œì´ë¸” ì´ˆê¸°í™”
         for (int i = 0; i <= n; i++) {
             graph.add(new ArrayList<Integer>());
             d[i] = -1;
         }
 
-        // ¸ğµç µµ·Î Á¤º¸ ÀÔ·Â ¹Ş±â
+        // ëª¨ë“  ë„ë¡œ ì •ë³´ ì…ë ¥ ë°›ê¸°
         for (int i = 0; i < m; i++) {
             int a = sc.nextInt();
             int b = sc.nextInt();
             graph.get(a).add(b);
         }
 
-        // Ãâ¹ß µµ½Ã±îÁöÀÇ °Å¸®´Â 0À¸·Î ¼³Á¤
+        // ì¶œë°œ ë„ì‹œê¹Œì§€ì˜ ê±°ë¦¬ëŠ” 0ìœ¼ë¡œ ì„¤ì •
         d[x] = 0;
 
-        // ³Êºñ ¿ì¼± Å½»ö(BFS) ¼öÇà
+        // ë„ˆë¹„ ìš°ì„  íƒìƒ‰(BFS) ìˆ˜í–‰
         Queue<Integer> q = new LinkedList<Integer>();
         q.offer(x);
         while (!q.isEmpty()) {
             int now = q.poll();
-            // ÇöÀç µµ½Ã¿¡¼­ ÀÌµ¿ÇÒ ¼ö ÀÖ´Â ¸ğµç µµ½Ã¸¦ È®ÀÎ
+            // í˜„ì¬ ë„ì‹œì—ì„œ ì´ë™í•  ìˆ˜ ìˆëŠ” ëª¨ë“  ë„ì‹œë¥¼ í™•ì¸
             for (int i = 0; i < graph.get(now).size(); i++) {
                 int nextNode = graph.get(now).get(i);
-                // ¾ÆÁ÷ ¹æ¹®ÇÏÁö ¾ÊÀº µµ½Ã¶ó¸é
+                // ì•„ì§ ë°©ë¬¸í•˜ì§€ ì•Šì€ ë„ì‹œë¼ë©´
                 if (d[nextNode] == -1) {
-                    // ÃÖ´Ü °Å¸® °»½Å
+                    // ìµœë‹¨ ê±°ë¦¬ ê°±ì‹ 
                     d[nextNode] = d[now] + 1;
                     q.offer(nextNode);
                 }
             }
         }
 
-        // ÃÖ´Ü °Å¸®°¡ KÀÎ ¸ğµç µµ½ÃÀÇ ¹øÈ£¸¦ ¿À¸§Â÷¼øÀ¸·Î Ãâ·Â
+        // ìµœë‹¨ ê±°ë¦¬ê°€ Kì¸ ëª¨ë“  ë„ì‹œì˜ ë²ˆí˜¸ë¥¼ ì˜¤ë¦„ì°¨ìˆœìœ¼ë¡œ ì¶œë ¥
         boolean check = false;
         for (int i = 1; i <= n; i++) {
             if (d[i] == k) {
@@ -58,7 +58,7 @@ public class Main {
             }
         }
 
-        // ¸¸¾à ÃÖ´Ü °Å¸®°¡ KÀÎ µµ½Ã°¡ ¾ø´Ù¸é, -1 Ãâ·Â
+        // ë§Œì•½ ìµœë‹¨ ê±°ë¦¬ê°€ Kì¸ ë„ì‹œê°€ ì—†ë‹¤ë©´, -1 ì¶œë ¥
         if (!check) System.out.println(-1);
     }
 }
