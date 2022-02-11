@@ -2,11 +2,11 @@ import java.util.*;
 /*
 public class Main {
  
-	public static int MAX = Integer.MIN_VALUE;	// ÃÖ´ñ°ª 
-	public static int MIN = Integer.MAX_VALUE;	// ÃÖ¼Ú°ª 
-	public static int[] operator = new int[4];	// ¿¬»êÀÚ °³¼ö 
-	public static int[] number;					// ¼ıÀÚ 
-	public static int N;						// ¼ıÀÚ °³¼ö 
+	public static int MAX = Integer.MIN_VALUE;	// ìµœëŒ“ê°’ 
+	public static int MIN = Integer.MAX_VALUE;	// ìµœì†Ÿê°’ 
+	public static int[] operator = new int[4];	// ì—°ì‚°ì ê°œìˆ˜ 
+	public static int[] number;					// ìˆ«ì 
+	public static int N;						// ìˆ«ì ê°œìˆ˜ 
  
 	public static void main(String[] args) throws IOException {
  
@@ -15,13 +15,13 @@ public class Main {
 		N = Integer.parseInt(br.readLine());
 		number = new int[N];
  
-		// ¼ıÀÚ ÀÔ·Â 
+		// ìˆ«ì ì…ë ¥ 
 		StringTokenizer st = new StringTokenizer(br.readLine(), " ");
 		for (int i = 0; i < N; i++) {
 			number[i] = Integer.parseInt(st.nextToken());
 		}
  
-		// ¿¬»êÀÚ ÀÔ·Â 
+		// ì—°ì‚°ì ì…ë ¥ 
 		st = new StringTokenizer(br.readLine(), " ");
 		for (int i = 0; i < 4; i++) {
 			operator[i] = Integer.parseInt(st.nextToken());
@@ -42,10 +42,10 @@ public class Main {
 		}
  
 		for (int i = 0; i < 4; i++) {
-			// ¿¬»êÀÚ °³¼ö°¡ 1°³ ÀÌ»óÀÎ °æ¿ì
+			// ì—°ì‚°ì ê°œìˆ˜ê°€ 1ê°œ ì´ìƒì¸ ê²½ìš°
 			if (operator[i] > 0) {
  
-				// ÇØ´ç ¿¬»êÀÚ¸¦ 1 °¨¼Ò½ÃÅ²´Ù.
+				// í•´ë‹¹ ì—°ì‚°ìë¥¼ 1 ê°ì†Œì‹œí‚¨ë‹¤.
 				operator[i]--;
  
 				switch (i) {
@@ -56,7 +56,7 @@ public class Main {
 				case 3:	dfs(num / number[idx], idx + 1);	break;
  
 				}
-				// Àç±ÍÈ£ÃâÀÌ Á¾·áµÇ¸é ´Ù½Ã ÇØ´ç ¿¬»êÀÚ °³¼ö¸¦ º¹±¸ÇÑ´Ù.
+				// ì¬ê·€í˜¸ì¶œì´ ì¢…ë£Œë˜ë©´ ë‹¤ì‹œ í•´ë‹¹ ì—°ì‚°ì ê°œìˆ˜ë¥¼ ë³µêµ¬í•œë‹¤.
 				operator[i]++;
 			}
 		}
@@ -67,24 +67,24 @@ public class Main {
 public class Main {
 
     public static int n;
-    // ¿¬»êÀ» ¼öÇàÇÏ°íÀÚ ÇÏ´Â ¼ö ¸®½ºÆ®
+    // ì—°ì‚°ì„ ìˆ˜í–‰í•˜ê³ ì í•˜ëŠ” ìˆ˜ ë¦¬ìŠ¤íŠ¸
     public static ArrayList<Integer> arr = new ArrayList<>();
-    // ´õÇÏ±â, »©±â, °öÇÏ±â, ³ª´©±â ¿¬»êÀÚ °³¼ö
+    // ë”í•˜ê¸°, ë¹¼ê¸°, ê³±í•˜ê¸°, ë‚˜ëˆ„ê¸° ì—°ì‚°ì ê°œìˆ˜
     public static int add, sub, mul, divi;
     
-    // ÃÖ¼Ú°ª°ú ÃÖ´ñ°ª ÃÊ±âÈ­
+    // ìµœì†Ÿê°’ê³¼ ìµœëŒ“ê°’ ì´ˆê¸°í™”
     public static int minValue = (int) 1e9;
     public static int maxValue = (int) -1e9;
 
-    // ±íÀÌ ¿ì¼± Å½»ö (DFS) ¸Ş¼­µå
+    // ê¹Šì´ ìš°ì„  íƒìƒ‰ (DFS) ë©”ì„œë“œ
     public static void dfs(int i, int now) {
-        // ¸ğµç ¿¬»êÀÚ¸¦ ´Ù »ç¿ëÇÑ °æ¿ì, ÃÖ¼Ú°ª°ú ÃÖ´ñ°ª ¾÷µ¥ÀÌÆ®
+        // ëª¨ë“  ì—°ì‚°ìë¥¼ ë‹¤ ì‚¬ìš©í•œ ê²½ìš°, ìµœì†Ÿê°’ê³¼ ìµœëŒ“ê°’ ì—…ë°ì´íŠ¸
         if (i == n) {
             minValue = Math.min(minValue, now);
             maxValue = Math.max(maxValue, now);
         }
         else {
-            // °¢ ¿¬»êÀÚ¿¡ ´ëÇÏ¿© Àç±ÍÀûÀ¸·Î ¼öÇà
+            // ê° ì—°ì‚°ìì— ëŒ€í•˜ì—¬ ì¬ê·€ì ìœ¼ë¡œ ìˆ˜í–‰
             if (add > 0) {
                 add -= 1;
                 dfs(i + 1, now + arr.get(i));
@@ -123,10 +123,10 @@ public class Main {
         mul = sc.nextInt();
         divi = sc.nextInt();
 
-        // DFS ¸Ş¼­µå È£Ãâ
+        // DFS ë©”ì„œë“œ í˜¸ì¶œ
         dfs(1, arr.get(0));
 
-        // ÃÖ´ñ°ª°ú ÃÖ¼Ú°ª Â÷·Ê´ë·Î Ãâ·Â
+        // ìµœëŒ“ê°’ê³¼ ìµœì†Ÿê°’ ì°¨ë¡€ëŒ€ë¡œ ì¶œë ¥
         System.out.println(maxValue);
         System.out.println(minValue);
     }
