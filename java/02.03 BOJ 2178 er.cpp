@@ -107,49 +107,35 @@ public class Main {
 
 }
 
-/* error?
-import java.io.*;
-import java.util.*;
-public class Main {
-    static int[][] map;
-    static boolean[][] checked; //확인 여부
-    static int n;
-    static int m;
-    static int cnt = 0;
-    public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
-        n = Integer.parseInt(st.nextToken());
-        m = Integer.parseInt(st.nextToken());
-
-        map = new int[n+1][m+1];
-        checked = new boolean[n+1][m+1];
-
-        for (int i = 1; i <= n; i++) {
-            st = new StringTokenizer(br.readLine(), "01", true);
-            for (int j = 1; j <= m; j++) {
-                map[i][j] = Integer.parseInt(st.nextToken());
-            }
-        }
-        dfs(1, 1);
-        System.out.println(cnt+1); //마지막 위치 +1
-    }
-
-    public static void dfs(int p, int k) {
-        if(p == n && k == m)
-            return;
-
-        checked[p][k] = true;
-        cnt++;
-        if(p+1<=n && map[p+1][k] == 1 && !checked[p+1][k])
-            dfs(p+1, k);
-        else if(k+1<=m && map[p][k+1] == 1 && !checked[p][k+1])
-            dfs(p, k+1);
-        else if(p-1>=1 && map[p-1][k] == 1 && !checked[p-1][k])
-            dfs(p-1, k);
-        else if(k-1>=1 && map[p][k-1] == 1 && !checked[p][k-1])
-            dfs(p, k-1);
-    }
-
-}
+/* bfs 방법이지만 시간초과 날 수 
+public static void dfs(int x, int y, int count) {
+		if(x == n-1 && y == m-1) {
+			minVal = Math.min(minVal, count);
+			return;
+		}
+		
+		if(count > minVal) return; //가지치기 - 이미 count가 minVal보다 커졌다면 return;
+		
+        	//방향배열 사용하지 않고 조건문으로 4가지를 나누어 보았다.
+		if(x > 0 && !visited[x-1][y] && map[x-1][y] == 1) { //상
+			visited[x-1][y] = true;
+			dfs(x-1, y, count + 1);
+			visited[x-1][y] = false;
+		}
+		if(x < n-1 && !visited[x+1][y] && map[x+1][y] == 1) { //하
+			visited[x+1][y] = true;
+			dfs(x+1, y, count + 1);
+			visited[x+1][y] = false;
+		}
+		if(y > 0 && !visited[x][y-1] && map[x][y-1] == 1) { //좌
+			visited[x][y-1] = true;
+			dfs(x, y-1, count + 1);
+			visited[x][y-1] = false;
+		}
+		if(y < m-1 && !visited[x][y+1] && map[x][y+1] == 1) { //우
+			visited[x][y+1] = true;
+			dfs(x, y+1, count + 1);
+			visited[x][y+1] = false;
+		}
+	}
 */
