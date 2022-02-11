@@ -24,47 +24,76 @@ public class Main {
     public static int n, m;
     public static int[][] graph = new int[201][201];
 
-    // ÀÌµ¿ÇÒ ³× °¡Áö ¹æÇâ Á¤ÀÇ (»ó, ÇÏ, ÁÂ, ¿ì) 
+    // ì´ë™í•  ë„¤ ê°€ì§€ ë°©í–¥ ì •ì˜ (ìƒ, í•˜, ì¢Œ, ìš°) 
     public static int dx[] = {-1, 1, 0, 0};
     public static int dy[] = {0, 0, -1, 1};
 
     public static int bfs(int x, int y) {
-        // Å¥(Queue) ±¸ÇöÀ» À§ÇØ queue ¶óÀÌºê·¯¸® »ç¿ë 
+        // í(Queue) êµ¬í˜„ì„ ìœ„í•´ queue ë¼ì´ë¸ŒëŸ¬ë¦¬ ì‚¬ìš© 
         Queue<Node> q = new LinkedList<>();
         q.offer(new Node(x, y));
-        // Å¥°¡ ºô ¶§±îÁö ¹İº¹ÇÏ±â 
+        // íê°€ ë¹Œ ë•Œê¹Œì§€ ë°˜ë³µí•˜ê¸° 
         while(!q.isEmpty()) {
             Node node = q.poll();
             x = node.getX();
             y = node.getY();
-            // ÇöÀç À§Ä¡¿¡¼­ 4°¡Áö ¹æÇâÀ¸·ÎÀÇ À§Ä¡ È®ÀÎ
+            // í˜„ì¬ ìœ„ì¹˜ì—ì„œ 4ê°€ì§€ ë°©í–¥ìœ¼ë¡œì˜ ìœ„ì¹˜ í™•ì¸
             for (int i = 0; i < 4; i++) {
                 int nx = x + dx[i];
                 int ny = y + dy[i];
-                // ¹Ì·Î Ã£±â °ø°£À» ¹ş¾î³­ °æ¿ì ¹«½Ã
+                // ë¯¸ë¡œ ì°¾ê¸° ê³µê°„ì„ ë²—ì–´ë‚œ ê²½ìš° ë¬´ì‹œ
                 if (nx < 0 || nx >= n || ny < 0 || ny >= m) continue;
-                // º®ÀÎ °æ¿ì ¹«½Ã
+                // ë²½ì¸ ê²½ìš° ë¬´ì‹œ
                 if (graph[nx][ny] == 0) continue;
-                // ÇØ´ç ³ëµå¸¦ Ã³À½ ¹æ¹®ÇÏ´Â °æ¿ì¿¡¸¸ ÃÖ´Ü °Å¸® ±â·Ï
+                // í•´ë‹¹ ë…¸ë“œë¥¼ ì²˜ìŒ ë°©ë¬¸í•˜ëŠ” ê²½ìš°ì—ë§Œ ìµœë‹¨ ê±°ë¦¬ ê¸°ë¡
                 if (graph[nx][ny] == 1) {
                     graph[nx][ny] = graph[x][y] + 1;
                     q.offer(new Node(nx, ny));
                 } 
             } 
         }
-        // °¡Àå ¿À¸¥ÂÊ ¾Æ·¡±îÁöÀÇ ÃÖ´Ü °Å¸® ¹İÈ¯
+        // ê°€ì¥ ì˜¤ë¥¸ìª½ ì•„ë˜ê¹Œì§€ì˜ ìµœë‹¨ ê±°ë¦¬ ë°˜í™˜
+        return graph[n - 1][m - 1];
+    }
+    /* ë…¸ë“œ ì•ˆë§Œë“¤ê³  ì´ë ‡ê²Œ ì¨ë„ ë¨ ì´ê²Œ 
+    public static int bfs(int x, int y) {
+        // í(Queue) êµ¬í˜„ì„ ìœ„í•´ queue ë¼ì´ë¸ŒëŸ¬ë¦¬ ì‚¬ìš©
+        Queue<int []> q = new LinkedList<>();
+        q.offer(new int[] {x, y});
+        // íê°€ ë¹Œ ë•Œê¹Œì§€ ë°˜ë³µí•˜ê¸°
+        while(!q.isEmpty()) {
+            int[] h = q.poll();
+            x = h[0];
+            y = h[1];
+            // í˜„ì¬ ìœ„ì¹˜ì—ì„œ 4ê°€ì§€ ë°©í–¥ìœ¼ë¡œì˜ ìœ„ì¹˜ í™•ì¸
+            for (int i = 0; i < 4; i++) {
+                int nx = x + dx[i];
+                int ny = y + dy[i];
+                // ë¯¸ë¡œ ì°¾ê¸° ê³µê°„ì„ ë²—ì–´ë‚œ ê²½ìš° ë¬´ì‹œ
+                if (nx < 0 || nx >= n || ny < 0 || ny >= m) continue;
+                // ë²½ì¸ ê²½ìš° ë¬´ì‹œ
+                if (graph[nx][ny] == 0) continue;
+                // í•´ë‹¹ ë…¸ë“œë¥¼ ì²˜ìŒ ë°©ë¬¸í•˜ëŠ” ê²½ìš°ì—ë§Œ ìµœë‹¨ ê±°ë¦¬ ê¸°ë¡
+                if (graph[nx][ny] == 1) {
+                    graph[nx][ny] = graph[x][y] + 1;
+                    q.offer(new int[] {nx, ny});
+                }
+            }
+        }
+        // ê°€ì¥ ì˜¤ë¥¸ìª½ ì•„ë˜ê¹Œì§€ì˜ ìµœë‹¨ ê±°ë¦¬ ë°˜í™˜
         return graph[n - 1][m - 1];
     }
 
+    */
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-        // N, MÀ» °ø¹éÀ» ±âÁØÀ¸·Î ±¸ºĞÇÏ¿© ÀÔ·Â ¹Ş±â
+        // N, Mì„ ê³µë°±ì„ ê¸°ì¤€ìœ¼ë¡œ êµ¬ë¶„í•˜ì—¬ ì…ë ¥ ë°›ê¸°
         n = sc.nextInt();
         m = sc.nextInt();
-        sc.nextLine(); // ¹öÆÛ Áö¿ì±â
+        sc.nextLine(); // ë²„í¼ ì§€ìš°ê¸°
 
-        // 2Â÷¿ø ¸®½ºÆ®ÀÇ ¸Ê Á¤º¸ ÀÔ·Â ¹Ş±â
+        // 2ì°¨ì› ë¦¬ìŠ¤íŠ¸ì˜ ë§µ ì •ë³´ ì…ë ¥ ë°›ê¸°
         for (int i = 0; i < n; i++) {
             String str = sc.nextLine();
             for (int j = 0; j < m; j++) {
@@ -72,7 +101,7 @@ public class Main {
             }
         }
 
-        // BFS¸¦ ¼öÇàÇÑ °á°ú Ãâ·Â
+        // BFSë¥¼ ìˆ˜í–‰í•œ ê²°ê³¼ ì¶œë ¥
         System.out.println(bfs(0, 0));
     }
 
@@ -83,7 +112,7 @@ import java.io.*;
 import java.util.*;
 public class Main {
     static int[][] map;
-    static boolean[][] checked; //È®ÀÎ ¿©ºÎ
+    static boolean[][] checked; //í™•ì¸ ì—¬ë¶€
     static int n;
     static int m;
     static int cnt = 0;
@@ -103,7 +132,7 @@ public class Main {
             }
         }
         dfs(1, 1);
-        System.out.println(cnt+1); //¸¶Áö¸· À§Ä¡ +1
+        System.out.println(cnt+1); //ë§ˆì§€ë§‰ ìœ„ì¹˜ +1
     }
 
     public static void dfs(int p, int k) {
