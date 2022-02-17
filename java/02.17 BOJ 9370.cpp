@@ -2,11 +2,11 @@ import java.util.*;
 import java.io.*;
 
 class Node implements Comparable<Node> {
-    int end;
+    int index;
     int weight;
 
-    Node(int end, int weight) {
-        this.end = end;
+    Node(int index, int weight) {
+        this.index = index;
         this.weight = weight;
     }
 
@@ -31,19 +31,18 @@ public class Main {
         int t = Integer.parseInt(br.readLine());
         while(t-->0) {
             st = new StringTokenizer(br.readLine());
-            node = Integer.parseInt(st.nextToken());    //±³Â÷·Î
-            road = Integer.parseInt(st.nextToken());    //µµ·Î
-            candi = Integer.parseInt(st.nextToken());   //¸ñÀûÁöÈÄº¸ °³¼ö
+            node = Integer.parseInt(st.nextToken());    //êµì°¨ë¡œ
+            road = Integer.parseInt(st.nextToken());    //ë„ë¡œ
+            candi = Integer.parseInt(st.nextToken());   //ëª©ì ì§€í›„ë³´ ê°œìˆ˜
             st = new StringTokenizer(br.readLine());
-            startLoc = Integer.parseInt(st.nextToken());    //Ãô¹ßÁö
-            nodeG = Integer.parseInt(st.nextToken());       //°£¼±G
-            nodeH = Integer.parseInt(st.nextToken());       //°£¼±H
+            startLoc = Integer.parseInt(st.nextToken());    //ì¸Œë°œì§€
+            nodeG = Integer.parseInt(st.nextToken());       //ê°„ì„ G
+            nodeH = Integer.parseInt(st.nextToken());       //ê°„ì„ H
 
             dist = new int[node + 1];
             check = new boolean[node + 1];
             a = new ArrayList<>();
 
-            //Arrays.fill(dist, INF);
             for (int i = 0; i <= node; i++) {
                 a.add(new ArrayList<>());
             }
@@ -59,7 +58,7 @@ public class Main {
 
             int[] ans = new int[candi];
             for (int i = 0; i < candi; i++) {
-                int x = Integer.parseInt(br.readLine());    //¸ñÀûÁö ÈÄº¸µé
+                int x = Integer.parseInt(br.readLine());    //ëª©ì ì§€ í›„ë³´ë“¤
                 int res1 = dijkstra(startLoc, nodeG) + dijkstra(nodeG, nodeH) + dijkstra(nodeH, x);
                 int res2 = dijkstra(startLoc, nodeH) + dijkstra(nodeH, nodeG) + dijkstra(nodeG, x);
                 if (Math.min(res2, res1) == dijkstra(startLoc, x))
@@ -77,7 +76,7 @@ public class Main {
     }
 
 
-    public static int dijkstra(int start, int end) {
+    public static int dijkstra(int start, int index) {
         Arrays.fill(dist, INF);
         Arrays.fill(check, false);
 
@@ -88,24 +87,23 @@ public class Main {
 
         while (!pq.isEmpty()) {
             Node curNode = pq.poll();
-            int cur = curNode.end;
+            int cur = curNode.index;
 
             if (!check[cur]) {
                 check[cur] = true;
 
                 for (Node node : a.get(cur)) {
-                    if (!check[node.end] && dist[node.end] > dist[cur] + node.weight) {
-                        dist[node.end] = dist[cur] + node.weight;
-                        pq.add(new Node(node.end, dist[node.end]));
-                    }   //!checked´Â ¹Ì¹æ¹® ÇÑ°É·Î ÇÑÁ¤ÇØÁÖ´Â ¿ªÇÒ
+                    if (!check[node.index] && dist[node.index] > dist[cur] + node.weight) {
+                        dist[node.index] = dist[cur] + node.weight;
+                        pq.add(new Node(node.index, dist[node.index]));
+                    }   //!checkedëŠ” ë¯¸ë°©ë¬¸ í•œê±¸ë¡œ í•œì •í•´ì£¼ëŠ” ì—­í• 
                 }
             }
         }
 
-        return dist[end];
+        return dist[index];
     }
 }
-
 
 
 
@@ -127,11 +125,11 @@ class Node implements Comparable<Node> {
 }
 
 public class Main {
-    public static final int INF = (int) 1e9; // ¹«ÇÑÀ» ÀÇ¹ÌÇÏ´Â °ªÀ¸·Î 10¾ïÀ» ¼³Á¤
+    public static final int INF = (int) 1e9; // ë¬´í•œì„ ì˜ë¯¸í•˜ëŠ” ê°’ìœ¼ë¡œ 10ì–µì„ ì„¤ì •
     public static int T, n, m, t, s, g, h;
-    // °¢ ³ëµå¿¡ ¿¬°áµÇ¾î ÀÖ´Â ³ëµå¿¡ ´ëÇÑ Á¤º¸¸¦ ´ã´Â ¹è¿­
+    // ê° ë…¸ë“œì— ì—°ê²°ë˜ì–´ ìˆëŠ” ë…¸ë“œì— ëŒ€í•œ ì •ë³´ë¥¼ ë‹´ëŠ” ë°°ì—´
     public static ArrayList<ArrayList<Node>> graph;
-    // ÃÖ´Ü °Å¸® Å×ÀÌºí ¸¸µé±â
+    // ìµœë‹¨ ê±°ë¦¬ í…Œì´ë¸” ë§Œë“¤ê¸°
     public static int[] d;
 
     public static void main(String[] args) {
@@ -147,17 +145,17 @@ public class Main {
             g = sc.nextInt();
             h = sc.nextInt();
 
-            // ±×·¡ÇÁ ÃÊ±âÈ­
+            // ê·¸ë˜í”„ ì´ˆê¸°í™”
             for (int i = 0; i <= n; i++) {
                 graph.add(new ArrayList<>());
             }
 
-            // ¸ğµç °£¼± Á¤º¸¸¦ ÀÔ·Â¹Ş±â
+            // ëª¨ë“  ê°„ì„  ì •ë³´ë¥¼ ì…ë ¥ë°›ê¸°
             for (int i = 0; i < m; i++) {
                 int a = sc.nextInt();
                 int b = sc.nextInt();
                 int d = sc.nextInt();
-                // a¹ø ³ëµå¿¡¼­ b¹ø ³ëµå·Î °¡´Â ºñ¿ëÀÌ c¶ó´Â ÀÇ¹Ì
+                // aë²ˆ ë…¸ë“œì—ì„œ bë²ˆ ë…¸ë“œë¡œ ê°€ëŠ” ë¹„ìš©ì´ cë¼ëŠ” ì˜ë¯¸
                 graph.get(a).add(new Node(b, d));
                 graph.get(b).add(new Node(a, d));
             }
@@ -176,7 +174,7 @@ public class Main {
 
                 if (Math.min(res1, res2) == res3) {
                     pq.add(d);
-                } //³¿»õ³ª´Â °£¼± °ÅÄ¡´Â°Ô ÃÖ¼Ò(res3)ÀÌ¸é Å¥¿¡ ³ÖÀ½ 
+                } //ëƒ„ìƒˆë‚˜ëŠ” ê°„ì„  ê±°ì¹˜ëŠ”ê²Œ ìµœì†Œ(res3)ì´ë©´ íì— ë„£ìŒ 
             }
 
             while (!pq.isEmpty()) {
@@ -190,21 +188,21 @@ public class Main {
         d = new int[n + 1];
         Arrays.fill(d, INF);
         PriorityQueue<Node> pq = new PriorityQueue<>();
-        // ½ÃÀÛ ³ëµå·Î °¡±â À§ÇÑ ÃÖ´Ü °æ·Î´Â 0À¸·Î ¼³Á¤ÇÏ¿©, Å¥¿¡ »ğÀÔ
+        // ì‹œì‘ ë…¸ë“œë¡œ ê°€ê¸° ìœ„í•œ ìµœë‹¨ ê²½ë¡œëŠ” 0ìœ¼ë¡œ ì„¤ì •í•˜ì—¬, íì— ì‚½ì…
         pq.add(new Node(start, 0));
         d[start] = 0;
-        while(!pq.isEmpty()) { // Å¥°¡ ºñ¾îÀÖÁö ¾Ê´Ù¸é
-            // °¡Àå ÃÖ´Ü °Å¸®°¡ ÂªÀº ³ëµå¿¡ ´ëÇÑ Á¤º¸ ²¨³»±â
+        while(!pq.isEmpty()) { // íê°€ ë¹„ì–´ìˆì§€ ì•Šë‹¤ë©´
+            // ê°€ì¥ ìµœë‹¨ ê±°ë¦¬ê°€ ì§§ì€ ë…¸ë“œì— ëŒ€í•œ ì •ë³´ êº¼ë‚´ê¸°
             Node node = pq.poll();
-            int now = node.index; // ÇöÀç ³ëµå
-            int dist = node.distance; // ÇöÀç ³ëµå±îÁöÀÇ ºñ¿ë
+            int now = node.index; // í˜„ì¬ ë…¸ë“œ
+            int dist = node.distance; // í˜„ì¬ ë…¸ë“œê¹Œì§€ì˜ ë¹„ìš©
 
-            // ÇöÀç ³ëµå°¡ ÀÌ¹Ì Ã³¸®µÈ ÀûÀÌ ÀÖ´Â ³ëµå¶ó¸é ¹«½Ã
+            // í˜„ì¬ ë…¸ë“œê°€ ì´ë¯¸ ì²˜ë¦¬ëœ ì ì´ ìˆëŠ” ë…¸ë“œë¼ë©´ ë¬´ì‹œ
             if (d[now] < dist) continue;
-            // ÇöÀç ³ëµå¿Í ¿¬°áµÈ ´Ù¸¥ ÀÎÁ¢ÇÑ ³ëµåµéÀ» È®ÀÎ
+            // í˜„ì¬ ë…¸ë“œì™€ ì—°ê²°ëœ ë‹¤ë¥¸ ì¸ì ‘í•œ ë…¸ë“œë“¤ì„ í™•ì¸
             for (int i = 0; i < graph.get(now).size(); i++) {
                 int cost = d[now] + graph.get(now).get(i).distance;
-                // ÇöÀç ³ëµå¸¦ °ÅÃÄ¼­, ´Ù¸¥ ³ëµå·Î ÀÌµ¿ÇÏ´Â °Å¸®°¡ ´õ ÂªÀº °æ¿ì
+                // í˜„ì¬ ë…¸ë“œë¥¼ ê±°ì³ì„œ, ë‹¤ë¥¸ ë…¸ë“œë¡œ ì´ë™í•˜ëŠ” ê±°ë¦¬ê°€ ë” ì§§ì€ ê²½ìš°
                 if (cost < d[graph.get(now).get(i).index]) {
                     d[graph.get(now).get(i).index] = cost;
                     pq.offer(new Node(graph.get(now).get(i).index, cost));
@@ -216,7 +214,7 @@ public class Main {
 }*/
 
 
-/* È¦Â¦ Ç®ÀÌ 
+/* í™€ì§ í’€ì´ 
 import java.io.*;
 import java.util.*;
 
@@ -249,13 +247,13 @@ public class Main {
         int testCnt = Integer.parseInt(br.readLine());
 
         for(int i = 0 ; i < testCnt; i++){
-            // n,m,t ÃÊ±âÈ­
+            // n,m,t ì´ˆê¸°í™”
             StringTokenizer st = new StringTokenizer(br.readLine());
             vertex = Integer.parseInt(st.nextToken());
             edge = Integer.parseInt(st.nextToken());
             t = Integer.parseInt(st.nextToken());
 
-            // ±×·¡ÇÁ ¹è¿­ ¼±¾ğ
+            // ê·¸ë˜í”„ ë°°ì—´ ì„ ì–¸
             arr = new int[vertex + 1][vertex + 1];
             dist = new int[vertex + 1];
             for(int j = 0 ; j < arr.length; j++)
@@ -263,34 +261,34 @@ public class Main {
             Arrays.fill(dist, INF);
             check = new boolean[vertex + 1];
 
-            // s, g, h ÃÊ±âÈ­
+            // s, g, h ì´ˆê¸°í™”
             st = new StringTokenizer(br.readLine());
             start = Integer.parseInt(st.nextToken());
             g = Integer.parseInt(st.nextToken());
             h = Integer.parseInt(st.nextToken());
 
-            // ±×·¡ÇÁ Á¤º¸ ÀúÀå
+            // ê·¸ë˜í”„ ì •ë³´ ì €ì¥
             for(int j = 0 ; j < edge; j++){
                 st = new StringTokenizer(br.readLine());
                 int vertex1 = Integer.parseInt(st.nextToken());
                 int vertex2 = Integer.parseInt(st.nextToken());
                 int distance = Integer.parseInt(st.nextToken());
-                // 2¹èÀÇ °¡ÁßÄ¡¸¦ ÀúÀå
+                // 2ë°°ì˜ ê°€ì¤‘ì¹˜ë¥¼ ì €ì¥
                 arr[vertex1][vertex2] = arr[vertex2][vertex1] = distance * 2;
             }
-            // 2¹èµÈ °ª¿¡ -1À» ÇÏ¿© È¦¼ö¸¦ ¸¸µç´Ù.
+            // 2ë°°ëœ ê°’ì— -1ì„ í•˜ì—¬ í™€ìˆ˜ë¥¼ ë§Œë“ ë‹¤.
             arr[h][g] = arr[g][h] = arr[h][g] - 1;
 
-            // ÈÄº¸Á¤´ä list¼±¾ğ
+            // í›„ë³´ì •ë‹µ listì„ ì–¸
             answerList = new ArrayList<>();
-            // ÈÄº¸°¡ µÇ´Â °ª Ãß°¡
+            // í›„ë³´ê°€ ë˜ëŠ” ê°’ ì¶”ê°€
             for(int j = 0; j < t; j++)
                 answerList.add(Integer.parseInt(br.readLine()));
 
             solve();
-            // ¿À¸§Â÷¼ø Á¤·Ä
+            // ì˜¤ë¦„ì°¨ìˆœ ì •ë ¬
             Collections.sort(answerList);
-            // Á¤´ä Ãâ·Â
+            // ì •ë‹µ ì¶œë ¥
             for(int num : answerList)
                 if(dist[num] % 2 == 1) bw.write(num + " ");
             bw.write("\n");
@@ -309,13 +307,13 @@ public class Main {
         queue.add(new Node(start, 0));
         dist[start] = 0;
 
-        // Å¥°¡ ºô ¶§±îÁö
+        // íê°€ ë¹Œ ë•Œê¹Œì§€
         while(!queue.isEmpty()){
             Node curNode = queue.poll();
             int cur = curNode.end;
-            // ÀÌ¹Ì ¹æ¹®ÇÑ ³ëµåÀÎ °æ¿ì ÆĞ½º
+            // ì´ë¯¸ ë°©ë¬¸í•œ ë…¸ë“œì¸ ê²½ìš° íŒ¨ìŠ¤
             if(check[cur]) continue;
-            // ¹æ¹® Ã³¸®
+            // ë°©ë¬¸ ì²˜ë¦¬
             check[cur] = true;
 
             for(int i = 1; i <= vertex; i++){
