@@ -76,7 +76,7 @@ public class Main {
     }
 
 
-    public static int dijkstra(int start, int index) {
+    public static int dijkstra(int start, int end) {
         Arrays.fill(dist, INF);
         Arrays.fill(check, false);
 
@@ -101,7 +101,7 @@ public class Main {
             }
         }
 
-        return dist[index];
+        return dist[end];
     }
 }
 
