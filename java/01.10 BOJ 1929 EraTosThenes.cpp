@@ -17,7 +17,7 @@ public class Main {
         StringBuilder sb = new StringBuilder();
 
         for(int i = M; i <= N; i++) {
-            // false = �Ҽ�
+            // false = ¼Ò¼ö
             if(!prime[i])
                 sb.append(i).append('\n');
         }
@@ -25,7 +25,7 @@ public class Main {
     }
 
     public static void get_prime() {
-        // true = �Ҽ��ƴ� , false = �Ҽ�
+        // true = ¼Ò¼ö¾Æ´Ô , false = ¼Ò¼ö
         prime[0] = prime[1] = true;
 
         for(int i = 2; i <= Math.sqrt(prime.length); i++) {
