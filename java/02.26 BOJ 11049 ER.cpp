@@ -38,7 +38,7 @@ public class Main {
     }
 }
 
-/*
+/* 재귀적 방법
 public class Q11049 {
     static int [][] a;
     static int [][] dp;
