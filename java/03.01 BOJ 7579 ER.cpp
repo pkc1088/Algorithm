@@ -1,54 +1,61 @@
 import java.io.*;
 import java.util.*;
 public class Main {
-    private static final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
     public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
         int n = Integer.parseInt(st.nextToken());
         int m = Integer.parseInt(st.nextToken());
         int ans = Integer.MAX_VALUE;
 
-        int[] memoryArr = new int[n];
-        int[] costArr = new int[n];
-        int[][] dp = new int[n][100001];
+        int[] memoryArr = new int[n + 1];
+        int[] costArr = new int[n + 1];
+        int[][] dp = new int[n + 1][100001];
 
         StringTokenizer st1 = new StringTokenizer(br.readLine());
         StringTokenizer st2 = new StringTokenizer(br.readLine());
-        // ºñ¿ë°ú ¸Þ¸ð¸® ÃÊ±âÈ­ºÎºÐ
-        for(int i = 0 ; i < n; i++){
+        // ë¹„ìš©ê³¼ ë©”ëª¨ë¦¬ ì´ˆê¸°í™”ë¶€ë¶„
+        for(int i = 1 ; i <= n; i++){
             memoryArr[i] = Integer.parseInt(st1.nextToken());
             costArr[i] = Integer.parseInt(st2.nextToken());
         }
 
-
-        for(int i = 0 ; i < n; i++){
-            int cost = costArr[i];
+        for(int i = 1 ; i <= n; i++){
             int memory = memoryArr[i];
+            int cost = costArr[i];
 
             for(int j = 0; j <= 10000; j++){        // N * c
 
-                if(i == 0) {                        // ¾ÛÀÌ ÇÏ³ªÀÏ °æ¿ì ¿¹¿ÜÃ³¸®
-                    if (j >= cost) 
+                if(i == 1) {                        // ì•±ì´ í•˜ë‚˜ì¼ ê²½ìš° ì˜ˆì™¸ì²˜ë¦¬
+                    if (j >= cost)
                         dp[i][j] = memory;
                 }
                 else {
                     if (j >= cost)
-                        dp[i][j] = Math.max(dp[i - 1][j - cost] + memory,
-                                            dp[i - 1][j]);
+                        dp[i][j] = Math.max(dp[i - 1][j - cost] + memory, //ì´ì „ìž…ë ¥ëœê²ƒì¤‘
+                                                                          //ë‹´ì„ìˆ˜ìžˆëŠ” ìµœëŒ€ j ì—ì„œ costë§Œí¼ ëº€ê±°ë¥¼ í•©í•˜ëŠ” ê±°ìž„
+                                            dp[i - 1][j]);  //ì´ì „ê°’(ìœ„ì— ê°’)
                     else
                         dp[i][j] = dp[i - 1][j];
                 }
 
-                // ¹®Á¦¿¡¼­ ÁÖ¾îÁø ÇÊ¿äÇÑ ¸Þ¸ð¸®º¸´Ù È®º¸°¡´ÉÇÑ ¸Þ¸ð¸®°¡ Å¬ °æ¿ì Á¤´äÀ¸·Î ÀúÀå
-                if(dp[i][j] >= m) 
+                // ë¬¸ì œì—ì„œ ì£¼ì–´ì§„ í•„ìš”í•œ ë©”ëª¨ë¦¬ë³´ë‹¤ í™•ë³´ê°€ëŠ¥í•œ ë©”ëª¨ë¦¬ê°€ í´ ê²½ìš° ì •ë‹µìœ¼ë¡œ ì €ìž¥
+                if(dp[i][j] >= m)
                     ans = Math.min(ans, j);
             }
         }
         System.out.println(ans);
+        System.out.println();
+        for (int i = 1; i <= 5; i++) {
+            for (int j = 0; j < 10; j++) {
+                System.out.print(dp[i][j] + "  ");
+            }
+            System.out.println();
+        }
+
     }
 }
-//ÃÖ´ë ¸Þ¸ð¸® Å©±â´Â dp[i][j] = max(dp[i - 1][j - cost] + memory, dp[i - 1][j])
-//¿Í °°Àº ¹æ½ÄÀ¸·Î ±¸ÇÒ¼ö ÀÖ´Ù. (³À»ö)
-//(cost : i¹øÂ° ¾ÛÀÇ ºñÈ°¼ºÈ­ ºñ¿ë, memory : i¹ø¤Š ¾ÛÀÇ ¸Þ¸ð¸® Å©±â)
-
+//dp[1][0] = 10 â†’ 1ë²ˆì§¸ê¹Œì§€ ìž…ë ¥ëœ ì•±ì„ ì‚¬ìš©í•  ë•Œ ë¹„ìš©0ìœ¼ë¡œ í™•ë³´ê°€ëŠ¥í•œ ìµœëŒ€ ë©”ëª¨ë¦¬ í¬ê¸°ëŠ” 10
+//ìµœëŒ€ ë©”ëª¨ë¦¬ í¬ê¸°ëŠ” dp[i][j] = max(dp[i - 1][j - cost] + memory, dp[i - 1][j])
+//ì™€ ê°™ì€ ë°©ì‹ìœ¼ë¡œ êµ¬í• ìˆ˜ ìžˆë‹¤. (ëƒ…ìƒ‰)
+//(cost : ië²ˆì§¸ ì•±ì˜ ë¹„í™œì„±í™” ë¹„ìš©, memory : ië²ˆì¨° ì•±ì˜ ë©”ëª¨ë¦¬ í¬ê¸°)
