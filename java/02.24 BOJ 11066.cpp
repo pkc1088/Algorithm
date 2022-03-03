@@ -2,18 +2,18 @@ import java.util.*;
 
 public class Main {
     /*
-    1. K°¡ 2º¸´Ù ÀÛÀ» ¶§
-    DP[i][i] ÀÇ °¡Ä¡´Â 0ÀÌ°í
-    DP[i][j] ´Â V[i]¿Í V[j]ÀÇ ÇÕÀÌ´Ù.
+    1. Kê°€ 2ë³´ë‹¤ ìž‘ì„ ë•Œ
+    DP[i][i] ì˜ ê°€ì¹˜ëŠ” 0ì´ê³ 
+    DP[i][j] ëŠ” V[i]ì™€ V[j]ì˜ í•©ì´ë‹¤.
 
-    2. K°¡ 2º¸´Ù Å¬ ¶§
-    V = {a, b, c}(K == 3)¶ó¸é
-    {a, b} / c ÀÇ °æ¿ì¿Í a / {b, c}ÀÇ °æ¿ì·Î ³ª´¶´Ù.
-    ±æÀÌ ³»¿¡¼­ 2°³¾¿ ¹­¾î ±× À§Ä¡¸¦ ÀÌµ¿ÇÏ¸é¼­ ÃÖ¼Ò°ªÀ» Ã£¾Æ³½´Ù.
-    Áï, DP[1][3](K == 3)À» ±¸ÇÒ ¶§ DP[1][2] + DP[3][3]°ú
-    DP[1][1] + DP[2][3]Áß ÃÖ¼Ò°ªÀ» ±¸ÇÏ¸é µÈ´Ù.
-    ÀÌ¸¦ ¼ö½ÄÈ­ ÇØº¸¸é
-    DP[i][j] = DP[i][k] + DP[k+1][j] (´Ü, i < k < j)
+    2. Kê°€ 2ë³´ë‹¤ í´ ë•Œ
+    V = {a, b, c}(K == 3)ë¼ë©´
+    {a, b} / c ì˜ ê²½ìš°ì™€ a / {b, c}ì˜ ê²½ìš°ë¡œ ë‚˜ë‰œë‹¤.
+    ê¸¸ì´ ë‚´ì—ì„œ 2ê°œì”© ë¬¶ì–´ ê·¸ ìœ„ì¹˜ë¥¼ ì´ë™í•˜ë©´ì„œ ìµœì†Œê°’ì„ ì°¾ì•„ë‚¸ë‹¤.
+    ì¦‰, DP[1][3](K == 3)ì„ êµ¬í•  ë•Œ DP[1][2] + DP[3][3]ê³¼
+    DP[1][1] + DP[2][3]ì¤‘ ìµœì†Œê°’ì„ êµ¬í•˜ë©´ ëœë‹¤.
+    ì´ë¥¼ ìˆ˜ì‹í™” í•´ë³´ë©´
+    DP[i][j] = DP[i][k] + DP[k+1][j] (ë‹¨, i < k < j)
      */
     public static void main(String[] args){
         Scanner s = new Scanner(System.in);
@@ -43,24 +43,24 @@ public class Main {
 
     private static int solution(int[] a){
         int size = a.length;
-        int DP[][] = new int[size][size];	//i~j±îÁö ÃÖ¼ÒÇÕ DP
-        int s[] = new int[size];	//SUM ÀúÀå
+        int DP[][] = new int[size][size];	//i~jê¹Œì§€ ìµœì†Œí•© DP
+        int s[] = new int[size];	//SUM ì €ìž¥
 
-        //i¿ä¼Ò±îÁö ÃÑÇÕ
+        //iìš”ì†Œê¹Œì§€ ì´í•©
         s[0] = a[0];
         for(int i = 1; i < size; i++)
             s[i] += s[i-1] + a[i];
 
-        //ÃÊ±â°ª ÀúÀå (ÇÏ³ª Â÷ÀÌ³¯‹š´Â ÀÎÁ¢ÇÑ°Å µÎ°³´õÇÑ°Ô ÀúÀåµÊ
+        //ì´ˆê¸°ê°’ ì €ìž¥ (í•˜ë‚˜ ì°¨ì´ë‚ Â‹ÂšëŠ” ì¸ì ‘í•œê±° ë‘ê°œë”í•œê²Œ ì €ìž¥ë¨
         for(int i = 0; i < size-1; i++)
             DP[i][i+1] = a[i] + a[i+1];
 
-        for(int gap = 2; gap < size; gap++){	//i¿Í j°£ gap 3Ä­ºÎÅÍ
-            for(int i = 0; i+gap < size; i++){	//i ÀÎµ¦½º
-                int j = i+gap;	//j ÀÎµ¦½º
-                DP[i][j] = Integer.MAX_VALUE;	//MINÀ» ±¸ÇÏ±â À§ÇØ
+        for(int gap = 2; gap < size; gap++){	//iì™€ jê°„ gap 3ì¹¸ë¶€í„°
+            for(int i = 0; i+gap < size; i++){	//i ì¸ë±ìŠ¤
+                int j = i+gap;	//j ì¸ë±ìŠ¤
+                DP[i][j] = Integer.MAX_VALUE;	//MINì„ êµ¬í•˜ê¸° ìœ„í•´
 
-                for(int k = i; k < j; k++)	//i~j »çÀÌÀÇ k°ª
+                for(int k = i; k < j; k++)	//i~j ì‚¬ì´ì˜ kê°’
                     DP[i][j] = MIN(DP[i][k] + DP[k+1][j] + sum(s, i, j), DP[i][j]);
             }
         }
@@ -89,7 +89,7 @@ public class Main {
             int[] arr = new int[K + 1];
             int[] sum = new int[K + 1];
             int[][] dp = new int[502][502];
-            int[][] kk = new int[502][502]; // Knuth ÃÖÀûÈ­¸¦ ¾²±â À§ÇØ Á¡È­½Ä ÇüÅÂ¸¦ ¸ÂÃçÁÖ±â À§ÇÔ.
+            int[][] kk = new int[502][502]; // Knuth ìµœì í™”ë¥¼ ì“°ê¸° ìœ„í•´ ì í™”ì‹ í˜•íƒœë¥¼ ë§žì¶°ì£¼ê¸° ìœ„í•¨.
 
             for (int i = 1; i <= K; i++) {
                 arr[i] = sc.nextInt();
@@ -103,7 +103,7 @@ public class Main {
                         dp[j][i] = Math.min(dp[j][i], dp[j][k] + dp[k + 1][i]);
                     }
                     dp[j][i] += sum[i] - sum[j - 1]; 
-                    // ¸¶Áö¸·¿¡ ÀüÃ¼ ÇÕÀ» ÇÑ ¹ø ´õÇØÁØ´Ù.
+                    // ë§ˆì§€ë§‰ì— ì „ì²´ í•©ì„ í•œ ë²ˆ ë”í•´ì¤€ë‹¤.
                 }
             }
             sb.append(dp[1][K]).append("\n");
@@ -112,13 +112,13 @@ public class Main {
 
         System.out.println(sb.toString());
         
-		  //ÃÖÀûÈ­¿ë
+		  //ìµœì í™”ìš©
             for (int i = 1; i <= K; i++) {
                 dp[i - 1][i] = 0;
                 kk[i - 1][i] = i;
             }
 
-            // DP ÃÖÀûÈ­ ±â¹ý Áß ÇÏ³ªÀÎ Knuth OptimizationÀ» »ç¿ëÇÑ ÄÚµå O(N^2)
+            // DP ìµœì í™” ê¸°ë²• ì¤‘ í•˜ë‚˜ì¸ Knuth Optimizationì„ ì‚¬ìš©í•œ ì½”ë“œ O(N^2)
             for (int d = 2; d <= K; d++) {
                 for (int i = 0; i + d <= K; i++) {
                     int j = i + d;
