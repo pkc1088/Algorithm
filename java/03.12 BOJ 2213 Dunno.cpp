@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
-// ¿ì¼ö¸¶À»ÀÌ¶û ´Þ¸® 1ÀÌ ·çÆ® ¾Æ´Ò ¼ö ÀÖÀ¸´Ï
-// ¾ç¹æÇâ Å½»öÀ» ÇØÁØ ´ÙÀ½ Àç¹æ¹® ¹æÁö¸¦ À§ÇØ ¹æ¹®¿©ºÎ¸¦ Ã¼Å©ÇØÁà¾ß ÇÑ´Ù.
+// ìš°ìˆ˜ë§ˆì„ì´ëž‘ ë‹¬ë¦¬ 1ì´ ë£¨íŠ¸ ì•„ë‹ ìˆ˜ ìžˆìœ¼ë‹ˆ
+// ì–‘ë°©í–¥ íƒìƒ‰ì„ í•´ì¤€ ë‹¤ìŒ ìž¬ë°©ë¬¸ ë°©ì§€ë¥¼ ìœ„í•´ ë°©ë¬¸ì—¬ë¶€ë¥¼ ì²´í¬í•´ì¤˜ì•¼ í•œë‹¤.
 public class Main {
     static ArrayList<Integer>[] v;
     static int[] weight;
@@ -57,8 +57,8 @@ public class Main {
 
         int child_num = v[pos].size();
 
-        dp[pos][0] = 0; // Âü¼® x
-        dp[pos][1] = weight[pos]; // Âü¼® o
+        dp[pos][0] = 0; // ì°¸ì„ x
+        dp[pos][1] = weight[pos]; // ì°¸ì„ o
 
         if(child_num == 0)
             return;
@@ -69,15 +69,15 @@ public class Main {
             if(!check[child]) {
                 dfs(child);
 
-                // ÀÚ½Ä x  > ÀÚ½Ä o
+                // ìžì‹ x  > ìžì‹ o
                 if(dp[child][0] > dp[child][1]) {
-                    dp[pos][0] += dp[child][0]; // ºÎ¸ð x ÀÚ½Ä x
+                    dp[pos][0] += dp[child][0]; // ë¶€ëª¨ x ìžì‹ x
 
-                }else { //  ÀÚ½Ä x  < ÀÚ½Ä o
-                    dp[pos][0] += dp[child][1]; // ºÎ¸ð x ÀÚ½Ä o
+                }else { //  ìžì‹ x  < ìžì‹ o
+                    dp[pos][0] += dp[child][1]; // ë¶€ëª¨ x ìžì‹ o
                 }
 
-                dp[pos][1] += dp[child][0]; // (°øÅë) ºÎ¸ð o ÀÚ½Ä x
+                dp[pos][1] += dp[child][0]; // (ê³µí†µ) ë¶€ëª¨ o ìžì‹ x
             }
         }
         check[pos] = false;
