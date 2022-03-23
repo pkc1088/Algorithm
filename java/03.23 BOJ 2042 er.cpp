@@ -18,19 +18,19 @@ public class Main {
             arr[i] = Long.parseLong(br.readLine());
         }
 
-        // 2^k >= NÀÎ ÃÖ¼ÒÀÇ k¸¦ Ã£¾Æ¾ß ÇÔ.
-        // ¾çº¯¿¡ logÀ» ÃëÇÏ¸é,
+        // 2^k >= Nì¸ ìµœì†Œì˜ kë¥¼ ì°¾ì•„ì•¼ í•¨.
+        // ì–‘ë³€ì— logì„ ì·¨í•˜ë©´,
         // k >= logN / log2
-        // (logN / log2)ÀÇ °ªÀ» ¿Ã¸²ÇÑ ÈÄ 1À» ´õÇÏ¸é k°¡ µÊ.
-        // À§¿¡¼­ ±¸ÇÑ k¸¦ Á¦°öÇÏ¸é ¼¼±×¸ÕÆ® Æ®¸®ÀÇ size¸¦ ±¸ÇÒ ¼ö ÀÖÀ½.
+        // (logN / log2)ì˜ ê°’ì„ ì˜¬ë¦¼í•œ í›„ 1ì„ ë”í•˜ë©´ kê°€ ë¨.
+        // ìœ„ì—ì„œ êµ¬í•œ kë¥¼ ì œê³±í•˜ë©´ ì„¸ê·¸ë¨¼íŠ¸ íŠ¸ë¦¬ì˜ sizeë¥¼ êµ¬í•  ìˆ˜ ìˆìŒ.
 
 		int k = (int) Math.ceil(Math.log(N) / Math.log(2)) + 1;
 		int size = (int) Math.pow(2, k);
 
 		tree = new long[size];
 
-        // »çÀÌÁî¸¦ ±¸ÇÏ´Â À§ÀÇ °úÁ¤ÀÌ ±ÍÂúÀ¸¸é,
-        // ´Ü¼øÈ÷ N¿¡ 4¸¦ °öÇÑ »çÀÌÁî¸¦ »ç¿ëÇØµµ ¹«¹æÇÔ.
+        // ì‚¬ì´ì¦ˆë¥¼ êµ¬í•˜ëŠ” ìœ„ì˜ ê³¼ì •ì´ ê·€ì°®ìœ¼ë©´,
+        // ë‹¨ìˆœíˆ Nì— 4ë¥¼ ê³±í•œ ì‚¬ì´ì¦ˆë¥¼ ì‚¬ìš©í•´ë„ ë¬´ë°©í•¨.
         //tree = new long[N * 4];
 
         init(1, N, 1);
@@ -58,7 +58,7 @@ public class Main {
         br.close();
     }
 
-    // start: ½ÃÀÛ ÀÎµ¦½º, end: ³¡ ÀÎµ¦½º
+    // start: ì‹œì‘ ì¸ë±ìŠ¤, end: ë ì¸ë±ìŠ¤
     public static long init(int start, int end, int node) {
         if (start == end) {
             return tree[node] = arr[start];
@@ -66,38 +66,38 @@ public class Main {
 
         int mid = (start + end) / 2;
 
-        // Àç±ÍÀûÀ¸·Î µÎ ºÎºĞÀ¸·Î ³ª´« µÚ¿¡ ±× ÇÕÀ» ÀÚ±â ÀÚ½ÅÀ¸·Î ÇÔ.
+        // ì¬ê·€ì ìœ¼ë¡œ ë‘ ë¶€ë¶„ìœ¼ë¡œ ë‚˜ëˆˆ ë’¤ì— ê·¸ í•©ì„ ìê¸° ìì‹ ìœ¼ë¡œ í•¨.
         return tree[node] = init(start, mid, node * 2) + init(mid + 1, end, node * 2 + 1);
     }
 
-    // start: ½ÃÀÛ ÀÎµ¦½º, end: ³¡ ÀÎµ¦½º
-    // left, right: ±¸°£ ÇÕÀ» ±¸ÇÏ°íÀÚ ÇÏ´Â ¹üÀ§
+    // start: ì‹œì‘ ì¸ë±ìŠ¤, end: ë ì¸ë±ìŠ¤
+    // left, right: êµ¬ê°„ í•©ì„ êµ¬í•˜ê³ ì í•˜ëŠ” ë²”ìœ„
     public static long sum(int start, int end, int node, int left, int right) {
-        // ¹üÀ§ ¹Û¿¡ ÀÖ´Â °æ¿ì
+        // ë²”ìœ„ ë°–ì— ìˆëŠ” ê²½ìš°
         if (left > end || right < start) {
             return 0;
         }
 
-        // ¹üÀ§ ¾È¿¡ ÀÖ´Â °æ¿ì
+        // ë²”ìœ„ ì•ˆì— ìˆëŠ” ê²½ìš°
         if (left <= start && end <= right) {
             return tree[node];
         }
 
-        // ±×·¸Áö ¾Ê´Ù¸é, µÎ ºÎºĞÀ¸·Î ³ª´©¾î ÇÕÀ» ±¸ÇÏ±â
+        // ê·¸ë ‡ì§€ ì•Šë‹¤ë©´, ë‘ ë¶€ë¶„ìœ¼ë¡œ ë‚˜ëˆ„ì–´ í•©ì„ êµ¬í•˜ê¸°
         int mid = (start + end) / 2;
         return sum(start, mid, node * 2, left, right) + sum(mid + 1, end, node * 2 + 1, left, right);
     }
 
-    // start: ½ÃÀÛ ÀÎµ¦½º, end: ³¡ ÀÎµ¦½º
-    // idx: ±¸°£ ÇÕÀ» ¼öÁ¤ÇÏ°íÀÚ ÇÏ´Â ³ëµå
-    // dif: ¼öÁ¤ÇÒ °ª
+    // start: ì‹œì‘ ì¸ë±ìŠ¤, end: ë ì¸ë±ìŠ¤
+    // idx: êµ¬ê°„ í•©ì„ ìˆ˜ì •í•˜ê³ ì í•˜ëŠ” ë…¸ë“œ
+    // dif: ìˆ˜ì •í•  ê°’
     public static void update(int start, int end, int node, int idx, long dif) {
-        // ¹üÀ§ ¹Û¿¡ ÀÖ´Â °æ¿ì
+        // ë²”ìœ„ ë°–ì— ìˆëŠ” ê²½ìš°
         if (idx < start || idx > end) {
             return;
         }
 
-        // ¹üÀ§ ¾È¿¡ ÀÖÀ¸¸é ³»·Á°¡¸ç ´Ù¸¥ ¿ø¼Òµµ °»½Å
+        // ë²”ìœ„ ì•ˆì— ìˆìœ¼ë©´ ë‚´ë ¤ê°€ë©° ë‹¤ë¥¸ ì›ì†Œë„ ê°±ì‹ 
         tree[node] += dif;
         if (start == end) {
             return;
