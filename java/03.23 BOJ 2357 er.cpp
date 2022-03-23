@@ -40,7 +40,7 @@ public class Main {
         br.close();
     }
 
-    // °¢ ±¸°£ º°·Î ÃÖ¼Ú°ªÀ» ÀúÀå.
+    // ê° êµ¬ê°„ ë³„ë¡œ ìµœì†Ÿê°’ì„ ì €ì¥.
     public static int minInit(int start, int end, int node) {
         if (start == end) {
             return minTree[node] = arr[start];
@@ -51,7 +51,7 @@ public class Main {
                 minInit(mid + 1, end, node * 2 + 1));
     }
 
-    // °¢ ±¸°£ º°·Î ÃÖ´ñ°ªÀ» ÀúÀå.
+    // ê° êµ¬ê°„ ë³„ë¡œ ìµœëŒ“ê°’ì„ ì €ì¥.
     public static int maxInit(int start, int end, int node) {
         if (start == end) {
             return maxTree[node] = arr[start];
@@ -62,14 +62,14 @@ public class Main {
                 maxInit(mid + 1, end, node * 2 + 1));
     }
 
-    // left ~ right ¹üÀ§ ³»¿¡ ÃÖ¼Ú°ªÀ» Ã£À½.
+    // left ~ right ë²”ìœ„ ë‚´ì— ìµœì†Ÿê°’ì„ ì°¾ìŒ.
     public static int minFind(int start, int end, int node, int left, int right) {
-        // ¹üÀ§¸¦ ¹ş¾î³­ °æ¿ì
+        // ë²”ìœ„ë¥¼ ë²—ì–´ë‚œ ê²½ìš°
         if (right < start || end < left) {
             return Integer.MAX_VALUE;
         }
 
-        // ¹üÀ§ ¾È¿¡ ÀÖ´Â °æ¿ì
+        // ë²”ìœ„ ì•ˆì— ìˆëŠ” ê²½ìš°
         if (left <= start && end <= right) {
             return minTree[node];
         }
@@ -80,14 +80,14 @@ public class Main {
                         minFind(mid + 1, end, node * 2 + 1, left, right));
     }
 
-    // left ~ right ¹üÀ§ ³»¿¡ ÃÖ´ñ°ªÀ» Ã£À½.
+    // left ~ right ë²”ìœ„ ë‚´ì— ìµœëŒ“ê°’ì„ ì°¾ìŒ.
     public static int maxFind(int start, int end, int node, int left, int right) {
-        // ¹üÀ§¸¦ ¹ş¾î³­ °æ¿ì
+        // ë²”ìœ„ë¥¼ ë²—ì–´ë‚œ ê²½ìš°
         if (right < start || end < left) {
             return Integer.MIN_VALUE;
         }
 
-        // ¹üÀ§ ¾È¿¡ ÀÖ´Â °æ¿ì
+        // ë²”ìœ„ ì•ˆì— ìˆëŠ” ê²½ìš°
         if (left <= start && end <= right) {
             return maxTree[node];
         }
