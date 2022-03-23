@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 //https://loosie.tistory.com/328
-//https://gre-eny.tistory.com/207  ÀÌ Ç®ÀÌ°¡ ÁÁÀ½
+//https://gre-eny.tistory.com/207  Ã€ÃŒ Ã‡Â®Ã€ÃŒÂ°Â¡ ÃÃÃ€Â½
 public class Main {
 
     static int n;
