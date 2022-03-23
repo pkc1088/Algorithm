@@ -13,13 +13,13 @@ public class Main {
         }
 
         long num = 0;
-        //¿ì¼±¼øÀ§ Å¥¿¡ 2°³ÀÌ»ó µé¾îÀÖ¾î¾ß ºñ±³°¡ °¡´ÉÇÏ´Ù.
+        //ìš°ì„ ìˆœìœ„ íì— 2ê°œì´ìƒ ë“¤ì–´ìˆì–´ì•¼ ë¹„êµê°€ ê°€ëŠ¥í•˜ë‹¤.
         while (pq.size() > 1) {
             long temp1 = pq.poll();
             long temp2 = pq.poll();
 
             num += temp1 + temp2;
-            pq.add(temp1 + temp2); //ÇÕÇÑ ¹­À½ ´Ù½Ã ³Ö±â
+            pq.add(temp1 + temp2); //í•©í•œ ë¬¶ìŒ ë‹¤ì‹œ ë„£ê¸°
         }
 
         System.out.println(num);
