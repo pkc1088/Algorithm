@@ -5,12 +5,12 @@ public class Main {
     public static boolean[] visited = new boolean[9];
     public static ArrayList<ArrayList<Integer>> graph = new ArrayList<ArrayList<Integer>>();
 
-    // DFS ÇÔ¼ö Á¤ÀÇ
+    // DFS í•¨ìˆ˜ ì •ì˜
     public static void dfs(int x) {
-        // ÇöÀç ³ëµå¸¦ ¹æ¹® Ã³¸®
+        // í˜„ì¬ ë…¸ë“œë¥¼ ë°©ë¬¸ ì²˜ë¦¬
         visited[x] = true;
         System.out.print(x + " ");
-        // ÇöÀç ³ëµå¿Í ¿¬°áµÈ ´Ù¸¥ ³ëµå¸¦ Àç±ÍÀûÀ¸·Î ¹æ¹®
+        // í˜„ì¬ ë…¸ë“œì™€ ì—°ê²°ëœ ë‹¤ë¥¸ ë…¸ë“œë¥¼ ì¬ê·€ì ìœ¼ë¡œ ë°©ë¬¸
         for (int i = 0; i < graph.get(x).size(); i++) {
             int y = graph.get(x).get(i);
             if (!visited[y]) dfs(y);
@@ -18,42 +18,42 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        // ±×·¡ÇÁ ÃÊ±âÈ­
+        // ê·¸ë˜í”„ ì´ˆê¸°í™”
         for (int i = 0; i < 9; i++) {
             graph.add(new ArrayList<Integer>());
         }
 
-        // ³ëµå 1¿¡ ¿¬°áµÈ ³ëµå Á¤º¸ ÀúÀå 
+        // ë…¸ë“œ 1ì— ì—°ê²°ëœ ë…¸ë“œ ì •ë³´ ì €ì¥ 
         graph.get(1).add(2);
         graph.get(1).add(3);
         graph.get(1).add(8);
         
-        // ³ëµå 2¿¡ ¿¬°áµÈ ³ëµå Á¤º¸ ÀúÀå 
+        // ë…¸ë“œ 2ì— ì—°ê²°ëœ ë…¸ë“œ ì •ë³´ ì €ì¥ 
         graph.get(2).add(1);
         graph.get(2).add(7);
         
-        // ³ëµå 3¿¡ ¿¬°áµÈ ³ëµå Á¤º¸ ÀúÀå 
+        // ë…¸ë“œ 3ì— ì—°ê²°ëœ ë…¸ë“œ ì •ë³´ ì €ì¥ 
         graph.get(3).add(1);
         graph.get(3).add(4);
         graph.get(3).add(5);
         
-        // ³ëµå 4¿¡ ¿¬°áµÈ ³ëµå Á¤º¸ ÀúÀå 
+        // ë…¸ë“œ 4ì— ì—°ê²°ëœ ë…¸ë“œ ì •ë³´ ì €ì¥ 
         graph.get(4).add(3);
         graph.get(4).add(5);
         
-        // ³ëµå 5¿¡ ¿¬°áµÈ ³ëµå Á¤º¸ ÀúÀå 
+        // ë…¸ë“œ 5ì— ì—°ê²°ëœ ë…¸ë“œ ì •ë³´ ì €ì¥ 
         graph.get(5).add(3);
         graph.get(5).add(4);
         
-        // ³ëµå 6¿¡ ¿¬°áµÈ ³ëµå Á¤º¸ ÀúÀå 
+        // ë…¸ë“œ 6ì— ì—°ê²°ëœ ë…¸ë“œ ì •ë³´ ì €ì¥ 
         graph.get(6).add(7);
         
-        // ³ëµå 7¿¡ ¿¬°áµÈ ³ëµå Á¤º¸ ÀúÀå 
+        // ë…¸ë“œ 7ì— ì—°ê²°ëœ ë…¸ë“œ ì •ë³´ ì €ì¥ 
         graph.get(7).add(2);
         graph.get(7).add(6);
         graph.get(7).add(8);
         
-        // ³ëµå 8¿¡ ¿¬°áµÈ ³ëµå Á¤º¸ ÀúÀå 
+        // ë…¸ë“œ 8ì— ì—°ê²°ëœ ë…¸ë“œ ì •ë³´ ì €ì¥ 
         graph.get(8).add(1);
         graph.get(8).add(7);
 
@@ -80,26 +80,26 @@ class Node {
 
 public class Main {
 
-    // Çà(Row)ÀÌ 3°³ÀÎ ÀÎÁ¢ ¸®½ºÆ® Ç¥Çö
+    // í–‰(Row)ì´ 3ê°œì¸ ì¸ì ‘ ë¦¬ìŠ¤íŠ¸ í‘œí˜„
     public static ArrayList<ArrayList<Node>> graph = new ArrayList<ArrayList<Node>>();
 
     public static void main(String[] args) {
-        // ±×·¡ÇÁ ÃÊ±âÈ­
+        // ê·¸ë˜í”„ ì´ˆê¸°í™”
         for (int i = 0; i < 3; i++) {
             graph.add(new ArrayList<Node>());
         }
 
-        // ³ëµå 0¿¡ ¿¬°áµÈ ³ëµå Á¤º¸ ÀúÀå (³ëµå, °Å¸®)
+        // ë…¸ë“œ 0ì— ì—°ê²°ëœ ë…¸ë“œ ì •ë³´ ì €ì¥ (ë…¸ë“œ, ê±°ë¦¬)
         graph.get(0).add(new Node(1, 7));
         graph.get(0).add(new Node(2, 5));
 
-        // ³ëµå 1¿¡ ¿¬°áµÈ ³ëµå Á¤º¸ ÀúÀå (³ëµå, °Å¸®)
+        // ë…¸ë“œ 1ì— ì—°ê²°ëœ ë…¸ë“œ ì •ë³´ ì €ì¥ (ë…¸ë“œ, ê±°ë¦¬)
         graph.get(1).add(new Node(0, 7));
 
-        // ³ëµå 2¿¡ ¿¬°áµÈ ³ëµå Á¤º¸ ÀúÀå (³ëµå, °Å¸®)
+        // ë…¸ë“œ 2ì— ì—°ê²°ëœ ë…¸ë“œ ì •ë³´ ì €ì¥ (ë…¸ë“œ, ê±°ë¦¬)
         graph.get(2).add(new Node(0, 5));
 
-        // ±×·¡ÇÁ Ãâ·Â
+        // ê·¸ë˜í”„ ì¶œë ¥
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < graph.get(i).size(); j++) {
                 graph.get(i).get(j).show();
