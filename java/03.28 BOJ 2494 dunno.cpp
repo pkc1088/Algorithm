@@ -1,4 +1,4 @@
-//D[n][k] : n��° ���ڳ��簡 k�� ���� ȸ���� ����
+//D[n][k] : n번째 숫자나사가 k번 왼쪽 회전한 상태
 public class Main {
     public static int N;
     public static int[] a;
@@ -142,5 +142,82 @@ int main() {
     return 0;
 }
 
+import java.io.*;
+import java.util.*;
 
-��ó: https://jsg1504.tistory.com/41 [��ȭ���� ������]
+public class Main {
+    public static void main(String args[]) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        StringTokenizer st;
+
+        int N = Integer.parseInt(br.readLine());
+        int start[] = new int[N + 1];
+        int end[] = new int[N + 1];
+        String input[] = br.readLine().split("");
+        for (int n = 1; n <= N; ++n) {
+            start[n] = Integer.parseInt(input[n - 1]);
+        }
+        input = br.readLine().split("");
+        for (int n = 1; n <= N; ++n) {
+            end[n] = Integer.parseInt(input[n - 1]);
+        }
+        int dp[][] = new int[N + 1][10];
+        for (int i = 0; i < 10; ++i) {
+            int pos = (start[1] + 10 + i) % 10;
+            dp[1][i] = (pos + 10 - end[1]) % 10 + i;
+        }
+        for (int n = 2; n <= N; ++n) {
+            for (int j = 0; j < 10; ++j) { // 현재 상태는 j번 돈 상태가 될 것인데
+                int min = Integer.MAX_VALUE;
+                for (int k = 0; k < 10; ++k) { // 내가 이번 턴에 k번을 돈 것이라면
+                    int pastOffset = (10 - k + j) % 10;
+                    int pos = (start[n] + j) % 10; // 현재 상태
+                    min = Math.min(min, dp[n - 1][pastOffset] + k + ((pos + 10 - end[n]) % 10));
+                }
+                dp[n][j] = min;
+            }
+        }
+        int min = Integer.MAX_VALUE;
+        ArrayList<Integer> choice = new ArrayList<>();
+        int index = N;
+        int currentOffset = 0;
+        for (int i = 0; i < 10; ++i) {
+            if (min > dp[N][i]) {
+                min = dp[N][i];
+                currentOffset = i;
+            }
+        }
+        bw.write(Integer.toString(min) + "\n"); // 최소횟수 출력
+        while (index > 0) { // 행동 찾기
+            for (int k = 0; k < 10; ++k) { // 내가 이번 턴에 왼쪽 방향으로 k번을 돈 것이라면
+                int pastOffset = (10 - k + currentOffset) % 10;
+                int pos = (start[index] + currentOffset) % 10; // 현재 위치
+                if (min == dp[index - 1][pastOffset] + k + ((pos + 10 - end[index]) % 10)) {
+                    currentOffset = pastOffset;
+                    if (k != 0)
+                        choice.add(index * 10 + k);
+                    if ((pos + 10 - end[index]) % 10 != 0)
+                        choice.add(-1 * (index * 10 + (pos + 10 - end[index]) % 10));
+                    min = dp[--index][pastOffset];
+                    break;
+                }
+            }
+        }
+        for (int n = choice.size() - 1; n >= 0; --n) {
+            int value = choice.get(n);
+            if(value < 0){
+                value *= -1;
+                bw.write(Integer.toString(value / 10) + " -" + Integer.toString(value % 10) + "\n");
+            } else {
+                bw.write(Integer.toString(value / 10) + " " + Integer.toString(value % 10) + "\n");
+            }
+        }
+        bw.flush();
+        bw.close();
+    }
+}
+
+
+
+출처: https://jsg1504.tistory.com/41 [장화신은 고양이]
