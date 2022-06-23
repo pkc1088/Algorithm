@@ -2,6 +2,65 @@ import java.io.*;
 import java.util.*;
 
 public class Main {
+
+	static int n, statusFullBit, INF = 987654321;
+	static int[][] w;
+	static int[][] dp;
+	public static void main(String[] args) throws IOException{
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st = null;
+		n = Integer.parseInt(br.readLine());
+		statusFullBit = (1<<n) -1;
+		w = new int[n][n];
+		dp = new int[n][statusFullBit];
+		for(int i=0; i<n; i++) {
+			Arrays.fill(dp[i], -1);
+		}
+		
+		for(int i=0; i<n; i++) {
+			st = new StringTokenizer(br.readLine());
+			for(int j=0; j<n; j++) {
+				w[i][j] = Integer.parseInt(st.nextToken());
+			}
+		}
+		
+		System.out.println(tsp(0,1)); // 0ë²ˆë„ì‹œ ë¶€í„° íƒìƒ‰ ì‹œì‘ (check: 0001)
+	}
+	
+	static int tsp(int x, int check) {
+        
+		// ëª¨ë“  ë„ì‹œ ë°©ë¬¸ ì™„ë£Œ
+		if(check == statusFullBit) {
+			if(w[x][0] == 0) return INF; // ê²½ë¡œ ì—†ìœ¼ë©´ INFë¡œ íƒìƒ‰ ë¬´íš¨í™” (Math.min)
+			else return w[x][0]; // ê²½ë¡œê°€ ì¡´ì¬í•˜ë©´ w[x][0]
+		}
+        
+		// ì´ë¯¸ ë°©ë¬¸í•œ ë„ì‹œ 
+		if(dp[x][check] != -1) return dp[x][check];
+        
+		// í•´ë‹¹ ë„ì‹œì— ì¶œì„ í‘œì‹œ
+		dp[x][check] = INF;
+        
+		// ë°©ë¬¸í•˜ì§€ ì•Šì€ ë„ì‹œ íƒìƒ‰ 
+		for(int i=0; i<n; i++) {
+			// next : i ë„ì‹œ ë°©ë¬¸
+			int next = check | (1<<i); 
+            
+			// ê²½ë¡œê°€ ì—†ê±°ë‚˜ i ë„ì‹œë¥¼ ì´ë¯¸ ë°©ë¬¸í–ˆì„ ê²½ìš° continue 
+			if(w[x][i] ==0 || (check & (1<<i)) != 0) continue;
+			
+			dp[x][check] = Math.min(dp[x][check], tsp(i, next) + w[x][i]);
+		}
+		
+		return dp[x][check];
+	}
+}
+
+// ë°‘ì—ê»€ ì‹œê°„ì´ˆê³¼ëœ¸
+import java.io.*;
+import java.util.*;
+
+public class Main {
     static int n;
     static int[][] map;
     static int[][] dp;
@@ -11,9 +70,9 @@ public class Main {
         n = Integer.parseInt(br.readLine());
         map = new int[n][n];
         
-        // i : ÇöÀç À§Ä¡ÇÑ µµ½Ã, j : Áö±İ±îÁö ¹æ¹®ÇÑ µµ½Ã 2Áø¼ö
+        // i : í˜„ì¬ ìœ„ì¹˜í•œ ë„ì‹œ, j : ì§€ê¸ˆê¹Œì§€ ë°©ë¬¸í•œ ë„ì‹œ 2ì§„ìˆ˜
         dp = new int[n][(1 << n) - 1];	
-        // ex) 1 << 4 = 10000(2) = 16ÀÎµ¥ ¿ì¸®ÀÇ ÃÖ´ë°ªÀº 1111(2) ÀÌ¹Ç·Î 1 »©±â
+        // ex) 1 << 4 = 10000(2) = 16ì¸ë° ìš°ë¦¬ì˜ ìµœëŒ€ê°’ì€ 1111(2) ì´ë¯€ë¡œ 1 ë¹¼ê¸°
 
         StringTokenizer st;
         for(int i = 0; i < n; i++) {
@@ -31,32 +90,32 @@ public class Main {
         System.out.println(dfs(0, 1));
     }
 
-    // ¾î´À µµ½Ã¿¡¼­ ½ÃÀÛÇÏµçÁö ÃÖ¼Òºñ¿ëÀº °°±â ¶§¹®¿¡ Æí¾ÈÇÏ°Ô 0¹øµµ½ÃºÎÅÍ ½ÃÀÛÇÏÀÚ
-    // city - ÇöÀç À§Ä¡ÇÑ µµ½Ã ÀÎµ¦½º, visitBitMask - Áö±İ±îÁö ¹æ¹®ÇÑ µµ½Ã 2Áø¼ö
+    // ì–´ëŠ ë„ì‹œì—ì„œ ì‹œì‘í•˜ë“ ì§€ ìµœì†Œë¹„ìš©ì€ ê°™ê¸° ë•Œë¬¸ì— í¸ì•ˆí•˜ê²Œ 0ë²ˆë„ì‹œë¶€í„° ì‹œì‘í•˜ì
+    // city - í˜„ì¬ ìœ„ì¹˜í•œ ë„ì‹œ ì¸ë±ìŠ¤, visitBitMask - ì§€ê¸ˆê¹Œì§€ ë°©ë¬¸í•œ ë„ì‹œ 2ì§„ìˆ˜
     public static int dfs(int city, int visitBitmask) {
 
-        if(visitBitmask == (1 << n) - 1) {	// ¸ğµç µµ½Ã¸¦ ¹æ¹®Çß´Ù¸é
-            if(map[city][0] == 0) {	// ÀÌ·± °æ¿ì´Â °ÅÀÇ ¾ø°ÚÁö¸¸, È¤½Ã ¹ß»ıÇÏ´Â °æ¿ì ¿¹¿Ü Ã³¸®
+        if(visitBitmask == (1 << n) - 1) {	// ëª¨ë“  ë„ì‹œë¥¼ ë°©ë¬¸í–ˆë‹¤ë©´
+            if(map[city][0] == 0) {	// ì´ëŸ° ê²½ìš°ëŠ” ê±°ì˜ ì—†ê² ì§€ë§Œ, í˜¹ì‹œ ë°œìƒí•˜ëŠ” ê²½ìš° ì˜ˆì™¸ ì²˜ë¦¬
                 return INF;
             }
 
-            return map[city][0];	// ÇöÀç µµ½Ã -> 0¹ø¤Š(½ÃÀÛ) µµ½Ã ÀÌµ¿ °Å¸®
+            return map[city][0];	// í˜„ì¬ ë„ì‹œ -> 0ë²ˆÂŠ(ì‹œì‘) ë„ì‹œ ì´ë™ ê±°ë¦¬
         }
 
-        if(dp[city][visitBitmask] != INF) {	// dp°ªÀÌ Á¸ÀçÇÏ´Â°æ¿ì
+        if(dp[city][visitBitmask] != INF) {	// dpê°’ì´ ì¡´ì¬í•˜ëŠ”ê²½ìš°
             return dp[city][visitBitmask];
         }
 
-        for(int i = 0; i < n; i++) {// ÇöÀç µµ½Ã¿¡¼­ °¢ iÀÇ µµ½Ã·Î ÀÌµ¿ÇÑ °æ¿ì¿¡ ´ëÇØ DFS ¼öÇà
+        for(int i = 0; i < n; i++) {// í˜„ì¬ ë„ì‹œì—ì„œ ê° iì˜ ë„ì‹œë¡œ ì´ë™í•œ ê²½ìš°ì— ëŒ€í•´ DFS ìˆ˜í–‰
             if((visitBitmask & (1 << i)) == 0 && map[city][i] != 0) {
-            // ÇÑ ¹øÀÌ¶óµµ ±× µµ½Ã¸¦ ¹æ¹®Çß´Âµ¥ ´Ù½Ã ±× µµ½Ã¸¦ ¹æ¹®ÇÏ´Â °æ¿ì ¿¹¿ÜÃ³¸®
-            //d[i][j] = ÇöÀç ÀÖ´Â µµ½Ã°¡ iÀÌ°í ÀÌ¹Ì ¹æ¹®ÇÑ µµ½ÃµéÀÇ ÁıÇÕÀÌ jÀÏ¶§, 
-            // ¹æ¹®ÇÏÁö ¾ÊÀº ³ª¸ÓÁö µµ½ÃµéÀ» ¸ğµÎ ¹æ¹®ÇÑ µÚ Ãâ¹ß µµ½Ã·Î µ¹¾Æ¿Ã ¶§ µå´Â ÃÖ¼Ò ºñ¿ë.
-            //Áï, ¹æ¹®ÇØ¾ßÇÏ´Â µµ½Ã(¿©±â¿¡ ½ÃÀÛÁöÁ¡À¸·Î µ¹¾Æ¿À´Â °Í Æ÷ÇÔ) µé±îÁö °¡´Â ÃÖ¼Ò ºñ¿ë
+            // í•œ ë²ˆì´ë¼ë„ ê·¸ ë„ì‹œë¥¼ ë°©ë¬¸í–ˆëŠ”ë° ë‹¤ì‹œ ê·¸ ë„ì‹œë¥¼ ë°©ë¬¸í•˜ëŠ” ê²½ìš° ì˜ˆì™¸ì²˜ë¦¬
+            //d[i][j] = í˜„ì¬ ìˆëŠ” ë„ì‹œê°€ iì´ê³  ì´ë¯¸ ë°©ë¬¸í•œ ë„ì‹œë“¤ì˜ ì§‘í•©ì´ jì¼ë•Œ, 
+            // ë°©ë¬¸í•˜ì§€ ì•Šì€ ë‚˜ë¨¸ì§€ ë„ì‹œë“¤ì„ ëª¨ë‘ ë°©ë¬¸í•œ ë’¤ ì¶œë°œ ë„ì‹œë¡œ ëŒì•„ì˜¬ ë•Œ ë“œëŠ” ìµœì†Œ ë¹„ìš©.
+            //ì¦‰, ë°©ë¬¸í•´ì•¼í•˜ëŠ” ë„ì‹œ(ì—¬ê¸°ì— ì‹œì‘ì§€ì ìœ¼ë¡œ ëŒì•„ì˜¤ëŠ” ê²ƒ í¬í•¨) ë“¤ê¹Œì§€ ê°€ëŠ” ìµœì†Œ ë¹„ìš©
                 dp[city][visitBitmask] = Math.min(dp[city][visitBitmask], 
                         dfs(i, visitBitmask | (1 << i)) + map[city][i]);	
-            // dfs(´ÙÀ½ µµ½Ã, ´ÙÀ½µµ½Ã ¹æ¹®Çß´Ù°í °¡Á¤)
-            // + ¿©±â¼­ ´ÙÀ½ µµ½Ã±îÁöÀÇ °Å¸® ¿Í ÃÖ¼Ò°Å¸® ºñ±³
+            // dfs(ë‹¤ìŒ ë„ì‹œ, ë‹¤ìŒë„ì‹œ ë°©ë¬¸í–ˆë‹¤ê³  ê°€ì •)
+            // + ì—¬ê¸°ì„œ ë‹¤ìŒ ë„ì‹œê¹Œì§€ì˜ ê±°ë¦¬ ì™€ ìµœì†Œê±°ë¦¬ ë¹„êµ
             }
         }
 
