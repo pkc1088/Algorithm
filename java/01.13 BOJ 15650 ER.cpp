@@ -36,3 +36,43 @@ public class Main {
         }
     }
 }
+
+/* my solution
+import java.io.*;
+import java.util.*;
+
+public class Main {
+    public static int N, M;
+    public static StringBuilder sb = new StringBuilder();
+    public static int[] arr;
+    public static boolean[] visit;
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        N = Integer.parseInt(st.nextToken());   // 4
+        M = Integer.parseInt(st.nextToken());   // 2
+        arr = new int[M];
+        visit = new boolean[N];
+        dfs(0, -1);
+
+        System.out.println(sb.toString());
+    }
+
+    public static void dfs(int depth, int check) {
+        if (depth == M) {
+            for (int val : arr) sb.append(val).append(' ');
+            sb.append('\n');
+            return;
+        }
+
+        for (int i = 0; i < N; i++) {
+            if (!visit[i] && i > check) {
+                visit[i] = true;
+                arr[depth] = i + 1;
+                dfs(depth + 1, i);
+                visit[i] = false;
+            }
+        }
+    }
+}
+*/
