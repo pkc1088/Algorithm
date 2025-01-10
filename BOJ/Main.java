@@ -1,4 +1,4 @@
-package BOJ_Quiz;
+package BOJ;
 
 import java.io.*;
 import java.util.StringTokenizer;
@@ -12,6 +12,7 @@ public class Main {
     static boolean[][] check, cbox;
     static int N = 9;
     public static void main(String[] args) throws IOException {
+        System.out.println("sstttthey");
         arr = new int[9][9];
         check = new boolean[9][9];
         for (int i = 0; i < N; i++) {

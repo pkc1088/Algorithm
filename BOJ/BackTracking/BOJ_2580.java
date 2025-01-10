@@ -1,4 +1,4 @@
-package BOJ_Quiz.BackTracking;
+package BOJ.BackTracking;
 
 import java.io.*;
 import java.util.StringTokenizer;

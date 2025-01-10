@@ -1,4 +1,4 @@
-package BOJ_Quiz.Recursive;
+package BOJ.Recursive;
 // temp messages
 public class test_123 {
     public static void main(String[] args) {

@@ -1,4 +1,4 @@
-package BOJ_Quiz.Recursive;
+package BOJ.Recursive;
 
 import java.io.*;
 
