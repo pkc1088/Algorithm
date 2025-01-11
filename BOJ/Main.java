@@ -32,6 +32,7 @@ public class Main {
         for (int i = 3; i < N + 1; i++) {
             dp[i] = (dp[i - 2] + dp[i - 1]) % 15746;
         }
+        System.out.println("ehy");
         System.out.println(dp[N]);
     }
 }
