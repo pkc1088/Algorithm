@@ -1,10 +1,10 @@
-package BOJ;
+package BOJ.DynamicProgramming;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
-public class Main {
+public class BOJ_1932 {
     static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     static StringBuilder sb = new StringBuilder();
@@ -26,16 +26,12 @@ public class Main {
             }
         }
         // scan range : arr[i][j] <- arr[i+1][j] & arr[i+1][j+1]
-        /*for (int i = 1; i <= n; i++) {
-            dp[n][i] = arr[n][i];
-        }*/
 
         for (int i = n; i >= 1; i--) {
             for (int j = 1; j <= n - 1; j++) {
                 arr[i - 1][j] += Math.max(arr[i][j], arr[i][j + 1]);
             }
         }
-        // 7같은 경우 위쪽 중 오른쪽 8로 부터 받는것과 위쪽 중 왼쪽 1로 부터 받는 것 중 결정하면 됨
         System.out.println(arr[1][1]);
     }
 
@@ -48,16 +44,3 @@ public class Main {
         }
     }
 }
-//System.out.println("dp["+i+"] = "+dp[i]);
-
-
-
-
-
-
-
-
-
-
-
-
