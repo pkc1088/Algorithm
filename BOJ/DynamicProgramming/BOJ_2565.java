@@ -1,4 +1,4 @@
-package BOJ;
+package BOJ.DynamicProgramming;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.StringTokenizer;
 
-public class Main {
+public class BOJ_2565 {
     static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     static StringBuilder sb = new StringBuilder();
@@ -47,7 +47,6 @@ public class Main {
             for(int j = 1; j < i + 1; j++) {
                 if(brr[j] < brr[i] && dp[j] + 1 > dp[i]) {
                     dp[i] = dp[j] + 1;
-                    //dp[i] = Math.max(dp[i], dp[j] + 1);
                 }
             }
         }
@@ -57,7 +56,16 @@ public class Main {
         }
         return max;
     }
-
+    /*
+        1 8     (제거)
+        2 2
+        3 9     (제거)
+        4 1     (제거)
+        6 4
+        7 6
+        9 7
+        10 10
+     */
     public static void print() {
         for (int i = 1; i < n + 1; i++) {
             System.out.println("dp[" + i + "] : " + dp[i]);
@@ -65,10 +73,6 @@ public class Main {
         System.out.println();
     }
 }
-
-
-
-
 
 
 
