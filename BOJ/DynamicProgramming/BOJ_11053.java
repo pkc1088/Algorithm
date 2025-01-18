@@ -26,12 +26,10 @@ public class BOJ_11053 {
                 }
             }
         }
-
         //seq j - seq i
-        // 최댓값(최대 길이) 탐색
         int max = -1;
         for(int i = 1; i < N + 1; i++) {
-            max = dp[i] > max ? dp[i] : max;
+            max = Math.max(dp[i], max);
         }
         System.out.println(max);
 

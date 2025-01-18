@@ -1,11 +1,11 @@
-package BOJ;
+package BOJ.DynamicProgramming;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.IOException;
 import java.util.StringTokenizer;
 
-public class Main {
+public class BOJ_12865 {
     static int[] W, V;
     static int[][] dp;
     static int N, K;

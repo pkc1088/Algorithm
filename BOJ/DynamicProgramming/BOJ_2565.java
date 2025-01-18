@@ -37,11 +37,11 @@ public class BOJ_2565 {
         for (int i = 1; i < n + 1; i++) {
             brr[i] = wire[i][1];
         }
-        System.out.println(n - LCS());
+        System.out.println(n - LIS());
         //print();
     }
 
-    public static int LCS() {
+    public static int LIS() {
         for(int i = 1; i < n + 1; i++) {
             dp[i] = 1;
             for(int j = 1; j < i + 1; j++) {
