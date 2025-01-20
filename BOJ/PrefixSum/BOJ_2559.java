@@ -16,7 +16,7 @@ public class BOJ_2559 {
     static boolean[] visit;
     static int[][] arr2, brr2, dp2;
     static int[] arr, brr, dp;
-    static int n, m, k, a, b, c, ans = -1, cnt = 0, max = Integer.MIN_VALUE;
+    static int n, m, k, a, b, c, ans = -1, cnt = 0, max = Integer.MIN_VALUE, min = Integer.MAX_VALUE;
     static String str1, str2;
 
     public static void main(String[] args) throws IOException {
@@ -25,7 +25,6 @@ public class BOJ_2559 {
         k = Integer.parseInt(st.nextToken());
         arr = new int[n + 1];
         dp = new int[n + 1];
-
         st = new StringTokenizer(br.readLine(), " ");
         for (int i = 1; i < n + 1; i++) {
             arr[i] = arr[i - 1] + Integer.parseInt(st.nextToken());
