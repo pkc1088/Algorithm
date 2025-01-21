@@ -1,4 +1,4 @@
-package BOJ;
+package BOJ.Greedy;
 
 import java.io.*;
 import java.util.*;
@@ -7,7 +7,7 @@ import java.io.InputStreamReader;
 import java.io.IOException;
 import java.util.StringTokenizer;
 
-public class Main {
+public class BOJ_1931 {
     static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     static StringBuilder sb = new StringBuilder();
