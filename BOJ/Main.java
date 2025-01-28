@@ -29,7 +29,7 @@ public class Main {
         a = Integer.parseInt(st.nextToken());
         b = Integer.parseInt(st.nextToken());
         c = Integer.parseInt(st.nextToken());
-
+        int p;
         pattern = new long[10];
     }
 
