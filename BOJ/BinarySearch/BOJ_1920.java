@@ -1,4 +1,4 @@
-package BOJ;
+package BOJ.BinarySearch;
 
 import java.io.*;
 import java.util.*;
@@ -7,7 +7,7 @@ import java.io.InputStreamReader;
 import java.io.IOException;
 import java.util.StringTokenizer;
 
-public class Main {
+public class BOJ_1920 {
     static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     static StringBuilder sb = new StringBuilder();
@@ -29,14 +29,17 @@ public class Main {
         for (int i = 1; i < n + 1; i++) {
             arr[i] = Integer.parseInt(st.nextToken());
         }
+        Arrays.sort(arr, 1, n + 1);
+        // 1 2 3 4 5
+        // 1 3 5 7 9
 
         m = Integer.parseInt(br.readLine());
         st = new StringTokenizer(br.readLine(), " ");
-        boolean exists;
         for (int i = 1; i < m + 1; i++) {
-            int target = Integer.parseInt(st.nextToken());
-            exists = Arrays.stream(arr).anyMatch(x -> x == target);
-            System.out.println(exists ? 1 : 0);
+            if (check(Integer.parseInt(st.nextToken())) == 1)
+                System.out.println(1);
+            else
+                System.out.println(0);
         }
     }
 
