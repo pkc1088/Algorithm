@@ -22,36 +22,53 @@ public class Main {
     static int max = Integer.MIN_VALUE, min = Integer.MAX_VALUE;
 
     public static void main(String[] args) throws IOException {
-        n = Integer.parseInt(br.readLine());
+        st = new StringTokenizer(br.readLine(), " ");
+        n = Integer.parseInt(st.nextToken());   // 5
+        c = Integer.parseInt(st.nextToken());   // 3
         arr = new int[n + 1];
-        st = new StringTokenizer(br.readLine(), " ");
-
+        dp = new int[n + 1];
         for (int i = 1; i < n + 1; i++) {
-            arr[i] = Integer.parseInt(st.nextToken());
+            arr[i] = Integer.parseInt(br.readLine());
         }
+        board = new int[n + 1][n + 1];
+        Arrays.sort(arr, 1, n + 1);
 
-        m = Integer.parseInt(br.readLine());
-        st = new StringTokenizer(br.readLine(), " ");
-        boolean exists;
-        for (int i = 1; i < m + 1; i++) {
-            int target = Integer.parseInt(st.nextToken());
-            exists = Arrays.stream(arr).anyMatch(x -> x == target);
-            System.out.println(exists ? 1 : 0);
+        ans = 11;
+        for (int i = arr[n] + 1; i >= 1; i--) {
+            ans = Math.min(upperBound(i), ans);
         }
+        //ans = upperBound(c);
+        System.out.println(ans);
     }
-
-    public static int check(int check) {
-        int st = 1, end = n;
-        while(st <= end) {
-            int mid = (st + end) / 2;
-            if (arr[mid] < check) {
-                st = mid + 1;
-            } else if (check < arr[mid]) {
-                end = mid - 1;
+    private static int upperBound(int dis) { // 1
+        int lo = 1;
+        int hi = n;
+        // lo가 hi랑 같아질 때 까지 반복
+        while (lo < hi) {
+            int mid = (lo + hi) / 2;
+            if (dis < arr[mid]) {
+                hi = mid;
             } else {
-                return 1;
+                lo = mid + 1;
             }
         }
-        return 0;
+        return lo;
+    }
+
+
+    private static void print() {
+        for (int i = 1; i < brr.length; i++) {
+            System.out.print(brr[i] + " ");
+        }
+        System.out.println();
+    }
+    private static void print2() {
+        for (int i = 1; i < n + 1; i++) {
+            for (int j = 1; j < n + 1; j++) {
+                System.out.print(board[i][j] + " ");
+            }
+            System.out.println();
+        }
+        System.out.println();
     }
 }
