@@ -1,4 +1,4 @@
-package BOJ;
+package BOJ.PriorityQueue;
 
 import java.io.*;
 import java.util.*;
@@ -7,7 +7,7 @@ import java.io.InputStreamReader;
 import java.io.IOException;
 import java.util.StringTokenizer;
 
-public class Main {
+public class BOJ_13975 {
     static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     static StringBuilder sb = new StringBuilder();
@@ -28,7 +28,14 @@ public class Main {
             file_shit();
         }
     }
-
+    /*
+    c1 c2 c3 c4
+    40 30 30 50
+    (c1+c2) + (c3+c4) = ((40+30)+(30+50)) =cal=> (70+80) =cal=> 150
+    전체 (a+b) 형태에서 더해지는 a와 b가 매번 최소가 되면 됨
+    즉 60 + 100 > 70 + 80 임 모든 파일에 대해서.
+    즉 매 시퀀스마다 전체 파일합치는 시퀀스가 최소가 되도록 유지만 하면 됨 각 시퀀스가
+*/
     public static void file_shit() throws IOException {
         n = Integer.parseInt(br.readLine());
         long sum = 0;

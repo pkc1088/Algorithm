@@ -1,4 +1,4 @@
-package BOJ;
+package BOJ.PriorityQueue;
 
 import java.io.*;
 import java.util.*;
@@ -7,7 +7,7 @@ import java.io.InputStreamReader;
 import java.io.IOException;
 import java.util.StringTokenizer;
 
-public class Main {
+public class BOJ_11279 {
     static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     static StringBuilder sb = new StringBuilder();
@@ -18,45 +18,28 @@ public class Main {
     static boolean[] visit;
     static int[][] dp2, brr2, arr2, board, origin;
     static int[] dp, brr, arr;
-    static int n, m, k, a, b, c, ans = 0, cnt = 0, sum = 0;
+    static int n, m, k, a, b, c, ans = 0, cnt = 0;
     static int max = Integer.MIN_VALUE, min = Integer.MAX_VALUE;
-    static PriorityQueue<Long> pq;
 
     public static void main(String[] args) throws IOException {
-        int tc = Integer.parseInt(br.readLine());
-        for (int i = 1; i < tc + 1; i++) {
-            file_shit();
-        }
-    }
-
-    public static void file_shit() throws IOException {
         n = Integer.parseInt(br.readLine());
-        long sum = 0;
-        pq = new PriorityQueue<>();
-        st = new StringTokenizer(br.readLine(), " ");
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
+        // new PriorityQueue<Integer>(Collections.reverseOrder());
+        // new PriorityQueue<>(Comparator.comparingInt(x -> -x));
         for (int i = 1; i < n + 1; i++) {
-            pq.add(Long.parseLong(st.nextToken()));
-        }
-
-        Long a, b;
-        while(!pq.isEmpty()) {
-            a = pq.poll();
-            b = pq.poll();
-
-            if (a == null || b == null) {
-                break;
+            int x = Integer.parseInt(br.readLine());
+            if(x != 0)
+                pq.add(-1 * x);
+            else {
+                if(pq.isEmpty()) System.out.println(0);
+                else System.out.println(-1 * pq.poll());
             }
-            if (a + b > 1) {
-                pq.add(a + b);
-            }
-            sum += a + b;
         }
-        System.out.println(sum);
     }
 
     private static void print() {
-        for (int i = 0; i < list.size(); i++) {
-            System.out.print(list.get(i) + " ");
+        for (int i = 1; i < brr.length; i++) {
+            System.out.print(brr[i] + " ");
         }
         System.out.println();
     }
