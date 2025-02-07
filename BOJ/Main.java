@@ -31,7 +31,6 @@ public class Main {
         for (int i = 1; i < n + 1; i++) {
             arr[i] = Integer.parseInt(st.nextToken());
         }
-        Stack<Character> stack = new Stack<>(), recover = new Stack<>();
 
 
 
