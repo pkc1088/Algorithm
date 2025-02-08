@@ -1,5 +1,4 @@
-package BOJ;
-
+package BOJ.GraphSearch;
 import java.io.*;
 import java.util.*;
 import java.io.BufferedReader;
@@ -7,7 +6,7 @@ import java.io.InputStreamReader;
 import java.io.IOException;
 import java.util.StringTokenizer;
 
-public class Main {
+public class BOJ_24479 {
     static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     static StringBuilder sb = new StringBuilder();
@@ -48,7 +47,7 @@ public class Main {
             graph.get(toVertex).add(fromVertex);
         }
         // 오름차순을 위해 정렬
-        for (int i = 1; i < graph.size(); i++) Collections.sort(graph.get(i), Collections.reverseOrder()); // 1 ~ < 6
+        for (int i = 1; i < graph.size(); i++) Collections.sort(graph.get(i)); // 1 ~ < 6
         count = 1;
         dfs(startVertex);
 
