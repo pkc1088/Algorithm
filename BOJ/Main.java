@@ -93,7 +93,7 @@ public class Main {
                 check[seq + 1] = check[seq] + 1;
                 queue.add(seq + 1);
             }
-
+//temp
         }
         return -1;
     }
