@@ -1,9 +1,9 @@
-package BOJ;
+package BOJ.ShortestPath;
 
 import java.util.*;
 import java.io.*;
 
-public class Main {
+public class BOJ_1956 {
     static final int INF = 987654321;
 
     public static void main(String[] args) throws NumberFormatException, IOException {
@@ -48,9 +48,6 @@ public class Main {
             }
         }
 
-        print(V, arr);
-
-
         int ans = INF;
         for (int i = 1; i <= V; i++) {
             for (int j = 1; j <= V; j++) {
@@ -74,13 +71,5 @@ public class Main {
         bw.close();
         br.close();
     }
-    public static void print(int V, int[][] arr) {
-        for (int i = 1; i < V + 1; i++) {
-            for (int j = 1; j < V + 1; j++) {
-                if(arr[i][j] == INF) System.out.print("-1 ");
-                else System.out.print(arr[i][j] + " ");
-            }
-            System.out.println();
-        }
-    }
+
 }
