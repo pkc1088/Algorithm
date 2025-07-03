@@ -1,4 +1,4 @@
-package BOJ.ShortestPath.Stack;
+package BOJ.Stack;
 
 import java.io.*;
 import java.util.*;
