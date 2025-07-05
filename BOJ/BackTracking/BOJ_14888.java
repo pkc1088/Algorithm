@@ -50,3 +50,78 @@ public class BOJ_14888 {
         }
     }
 }
+
+/*
+package BOJ;
+
+import java.util.*;
+import java.io.*;
+
+public class Main {
+
+    static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    static StringBuilder sb = new StringBuilder();
+    static StringTokenizer st;
+    static int n, m, cnt;
+    static int max = Integer.MIN_VALUE;
+    static int min = Integer.MAX_VALUE;
+    static int[]arr;
+    static boolean[][] visited;
+
+    public static void main(String[] args) throws IOException {
+        n = Integer.parseInt(br.readLine());
+        arr = new int[n + 1];
+        st = new StringTokenizer(br.readLine(), " ");
+        for (int i = 1; i < n + 1; i++) {
+            arr[i] = Integer.parseInt(st.nextToken());
+        }
+        st = new StringTokenizer(br.readLine(), " ");
+        int pls = Integer.parseInt(st.nextToken());
+        int mis = Integer.parseInt(st.nextToken());
+        int mul = Integer.parseInt(st.nextToken());
+        int div = Integer.parseInt(st.nextToken());
+        dfs(pls, mis, mul, div, arr[1], arr[1], 2);
+        System.out.println(max + "\n" + min);
+    }
+
+    public static void dfs(int pls, int mis, int mul, int div, int vmax, int vmin, int idx) {
+        if(pls == 0 && mis == 0 && mul == 0 && div == 0) {
+            if(vmax > max) max = vmax;
+            if(vmin < min) min = vmin;
+            return;
+        }
+
+        if(pls > 0) {
+            vmax += arr[idx];
+            vmin += arr[idx];
+            dfs(pls - 1, mis, mul, div, vmax, vmin, idx + 1);
+            vmax -= arr[idx];
+            vmin -= arr[idx];
+        }
+        if(mis > 0) {
+            vmax -= arr[idx];
+            vmin -= arr[idx];
+            dfs(pls, mis - 1, mul, div, vmax, vmin,idx + 1);
+            vmax += arr[idx];
+            vmin += arr[idx];
+        }
+        if(mul > 0) {
+            vmax *= arr[idx];
+            vmin *= arr[idx];
+            dfs(pls, mis, mul - 1, div, vmax, vmin,idx + 1);
+            vmax /= arr[idx];
+            vmin /= arr[idx];
+        }
+        if(div > 0) {
+            vmax /= arr[idx];
+            vmin /= arr[idx];
+            dfs(pls, mis, mul, div - 1, vmax, vmin,idx + 1);
+            vmax *= arr[idx];
+            vmin *= arr[idx];
+        }
+    }
+
+
+}
+
+ */
