@@ -8,6 +8,72 @@ import java.io.IOException;
 import java.util.StringTokenizer;
 import static java.lang.System.exit;
 
+// visit 안쓰는 버전
+/*
+package BOJ;
+
+import java.util.*;
+import java.io.*;
+
+public class BOJ_16928 {
+    static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    static ArrayList<ArrayList<Integer>> graph = new ArrayList<>();
+    static PriorityQueue<Integer> pq = new PriorityQueue<>();
+    static StringBuilder sb = new StringBuilder();
+    static List<int[]> list = new ArrayList<>();
+    static int max = Integer.MIN_VALUE;
+    static int min = Integer.MAX_VALUE;
+    static int n, m, h, r, v, t, k, l, s, cnt, ans;
+    static int[] dr = {-1, 0, 1, 0};
+    static int[] dc = {0, 1, 0, -1};
+    static StringTokenizer st;
+    static boolean[] visit;
+    static int[] arr;
+    static Map<Integer, Integer> ladder = new HashMap<>();
+    static Map<Integer, Integer> snake = new HashMap<>();
+
+    public static void main(String[] args) throws IOException {
+        st = new StringTokenizer(br.readLine(), " ");
+        l = Integer.parseInt(st.nextToken());
+        s = Integer.parseInt(st.nextToken());
+        arr = new int[100 + 1];
+        for (int i = 0; i < l + s; i++) {
+            st = new StringTokenizer(br.readLine(), " ");
+            int from = Integer.parseInt(st.nextToken());
+            int to = Integer.parseInt(st.nextToken());
+            if(i < l) ladder.put(from, to);
+            else snake.put(from, to);
+        }
+        bfs();
+    }
+
+    public static void bfs() {
+        Queue<int[]> q = new LinkedList<>();
+        q.offer(new int[]{1, 1});
+
+        while(!q.isEmpty()) {
+
+            int[] dto = q.poll();
+            int step = dto[0];
+            int nxt_time = dto[1];
+
+            if(step == 100) {System.out.println(arr[step]);return;}
+
+            for (int i = 1; i < 7; i++) {
+                int nxt_step = step + i;
+                if(1 <= nxt_step && nxt_step <= 100 && arr[nxt_step] == 0) {
+                    arr[nxt_step] = nxt_time;
+                    if(ladder.containsKey(nxt_step)) {
+                        q.offer(new int[] {ladder.get(nxt_step), nxt_time + 1});
+                    } else if(snake.containsKey(nxt_step)) {
+                        q.offer(new int[] {snake.get(nxt_step), nxt_time + 1});
+                    } else q.offer(new int[] {nxt_step, nxt_time + 1});
+                }
+            }
+        }
+    }
+}
+ */
 public class BOJ_16928 {
     static int n, m;
     static boolean[] visited = new boolean[101];

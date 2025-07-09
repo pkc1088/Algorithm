@@ -68,10 +68,9 @@ public class BOJ_2206 {
                 int ny = p.y + dy[i];
                 int nx = p.x + dx[i];
 
-                if (ny < 0 || nx < 0 || ny >= n || nx >= m)
-                    continue;
+                if (ny < 0 || nx < 0 || ny >= n || nx >= m) continue;
 
-                if (visited[ny][nx] <= p.drill)
+                if (visited[ny][nx] <= p.drill) continue;
                     // 이미 현재보다 적은 횟수로 벽을 부순 경우 방문 불필요 (최적 경로 보장)
                     // 현재 (ny, nx) 좌표에 도달한 적이 있는데,
                     // 그때 사용한 벽 부수기 횟수가 현재 경로에서의 벽 부수기 횟수 p.drill보다
@@ -80,7 +79,6 @@ public class BOJ_2206 {
                     즉, 이미 더 적은(또는 같은) 횟수로 (ny, nx)에 도달했기 때문에,
                     현재 경로는 더 많은 벽을 부수었거나 같으므로, 더 나은(최적의) 경로가 아닙니다.
                      */
-                    continue;
 
                 if (board[ny][nx] == 0) {
                     visited[ny][nx] = p.drill;
@@ -91,7 +89,7 @@ public class BOJ_2206 {
                     if (p.drill == 0) {
                         visited[ny][nx] = p.drill + 1;
                         q.add(new Place(ny, nx, p.dis + 1, p.drill + 1));
-                        // 벽아면 p.drill + 1
+                        // 벽이면 p.drill + 1
                     }
                 }
             }
@@ -180,7 +178,7 @@ public class Main {
                         visited[newX][newY][1] = true;
                         queue.offer(new Point(newX, newY, true, point.cnt + 1));
                     } else if (!visited[newX][newY][0]){
-                        // 벽이 아니고 방문한적이 없다면 큐에 값을 넣습니다.
+                        // 벽이 아니고 방문한적이 없다면 큐에 정보를 넣습니다.
                         visited[newX][newY][0] = true;
                         queue.offer(new Point(newX, newY, false, point.cnt + 1));
                     }
