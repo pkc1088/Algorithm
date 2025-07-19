@@ -5,82 +5,131 @@ import java.io.*;
 
 public class Main {
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-    static ArrayList<ArrayList<Integer>> graph = new ArrayList<>();
-    static PriorityQueue<Integer> pq = new PriorityQueue<>();
+    //    static ArrayList<ArrayList<Integer>> graph = new ArrayList<>();
+    static ArrayList<ArrayList<int[]>> graph = new ArrayList<>();
+    //    static PriorityQueue<Integer> pq = new PriorityQueue<>();
     static StringBuilder sb = new StringBuilder();
     static List<int[]> list = new ArrayList<>();
+    static Queue<int[]> q = new LinkedList<>();
     static int max = Integer.MIN_VALUE;
     static int min = Integer.MAX_VALUE;
     static int n, m, h, r, v, e, t, k, l, s, cnt, ans;
     static int[] dr = {-1, 0, 1, 0};
     static int[] dc = {0, 1, 0, -1};
     static StringTokenizer st;
-    static boolean[][] visit;
-    static int[][] arr, brr;
+    static boolean[] visit;
+    static int[][] arr;
+    static int[] brr;
     static Map<Integer, Integer> snake = new HashMap<>();
 
     public static void main(String[] args) throws IOException {
-        t = Integer.parseInt(st.nextToken());
-        while(t-->0) testCase();
-    }
-    public static void testCase() throws IOException {
-        graph = new ArrayList<>();
         st = new StringTokenizer(br.readLine(), " ");
         v = Integer.parseInt(st.nextToken());
         e = Integer.parseInt(st.nextToken());
-        for (int i = 0; i < v + 1; i++) {
+
+        for (int i = 0; i < v + 1; i++)
             graph.add(new ArrayList<>());
-        }
 
         for (int i = 1; i < e + 1; i++) {
             st = new StringTokenizer(br.readLine(), " ");
-            int n1 = Integer.parseInt(st.nextToken());
-            int n2 = Integer.parseInt(st.nextToken());
-            graph.get(n1).add(n2);
-            graph.get(n2).add(n1);
+            int from = Integer.parseInt(st.nextToken());
+            int to = Integer.parseInt(st.nextToken());
+            int weight = Integer.parseInt(st.nextToken());
+            graph.get(from).add(new int[]{to, weight});
+            graph.get(to).add(new int[]{from, weight});
+        }
+        st = new StringTokenizer(br.readLine(), " ");
+        int must1 = Integer.parseInt(st.nextToken());
+        int must2 = Integer.parseInt(st.nextToken());
+
+        long ans1 = 0, ans2 = 0, ans3 = 0, ans4 = 0;
+
+//        if(e == 0) {
+//            System.out.println(-1);
+//        }
+//        if(v == 2) {
+//            dijkstra(1);
+//            ans3 = brr[v];
+//            System.out.println(ans3);
+//            return;
+//        }
+
+        long route1 = 0;
+        long route2 = 0;
+
+        dijkstra(1);
+        long d1 = brr[must1];
+        long d2 = brr[must2];
+
+        dijkstra(must1);
+        long d3 = brr[must2];
+        long d4 = brr[v];
+
+        dijkstra(must2);
+        long d5 = brr[v];
+
+        // 1 -> must1 -> must2 -> v
+        if (d1 == Integer.MAX_VALUE || d3 == Integer.MAX_VALUE || d5 == Integer.MAX_VALUE) {
+            route1 = Long.MAX_VALUE;
+        } else {
+            route1 = d1 + d3 + d5;
         }
 
-        bfs();
+        // 1 -> must2 -> must1 -> v
+        if (d2 == Integer.MAX_VALUE || d3 == Integer.MAX_VALUE || d4 == Integer.MAX_VALUE) {
+            route2 = Long.MAX_VALUE;
+        } else {
+            route2 = d2 + d3 + d4;
+        }
+
+        long answer = Math.min(route1, route2);
+
+        if (answer >= Integer.MAX_VALUE) {
+            System.out.println(-1);
+        } else {
+            System.out.println(answer);
+        }
+//        dijkstra(1);
+//        ans1 += brr[must1]; // 1 ~ must1
+//        ans2 += brr[must2]; // 1 ~ must2
+//
+//        dijkstra(must1);
+//        ans1 += brr[must2]; // must1 ~ must2
+//        ans2 += brr[v];     // must1 ~ v
+//
+//        dijkstra(must2);
+//        ans1 += brr[v];     // must2 ~ v
+//        ans2 += brr[must1]; // must2 ~ must1
+//
+//        long final_ans = Math.min(ans1, ans2);
+//        if(final_ans < Integer.MAX_VALUE)
+//            System.out.println(final_ans);
+//        else
+//            System.out.println(-1);
     }
 
+    public static void dijkstra(int k) {
+        PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> a[1] - b[1]); // 필수임
+        brr = new int[v + 1];
+        Arrays.fill(brr, Integer.MAX_VALUE);
 
-    public static int bfs() {
-        Queue<int[]> q = new LinkedList<>();
-        // cycle 생기는지 여부 ?
-        int startNode = 1;
-        q.offer(new int[]{1, 1, 0, 1}); // row, col, break, distance
-        visit[1][1] = true;
+        pq.offer(new int[]{k, 0});
+        brr[k] = 0;
 
-        while (!q.isEmpty()) {
+        while(!pq.isEmpty()) {
+            int[] dto = pq.poll();
+            int cn = dto[0]; // current node
+            int cw = dto[1]; // current weight
 
-            int[] dto = q.poll();
-            int row = dto[0];
-            int col = dto[1];
-            int broke = dto[2];
-            int dis = dto[3];
-//            if(ans <= dis) return ans;
-
-            if (row == n && col == m) {
-//                System.out.println("returned : " + dis);
-                return dis;
-            }
-
-            // 부수는 것과 안 부수는 것 중 최단이 어떤건진 모름
-
-            for (int i = 0; i < 4; i++) {
-                int nr = row + dr[i];
-                int nc = col + dc[i];
-                if (!visit[nr][nc] && 1 <= nr && nr <= n && 1 <= nc && nc <= m) {
-                    if (arr[nr][nc] == 0) {
-//                        System.out.println("passed : " + nr + ", " + nc);
-                        visit[nr][nc] = true;
-                        q.offer(new int[]{nr, nc, broke, dis + 1});
-                    }
+            if (cw > brr[cn]) continue;
+            for (int[] next : graph.get(cn)) {
+                int newDist = brr[cn] + next[1];
+                if (newDist < brr[next[0]]) {
+                    brr[next[0]] = newDist;
+                    pq.add(new int[]{next[0], newDist});
                 }
             }
         }
-//        System.out.println("default returned : -1");
-        return -1;
     }
 }
 
