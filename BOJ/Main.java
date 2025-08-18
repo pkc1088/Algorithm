@@ -27,12 +27,8 @@ public class Main {
         n = Integer.parseInt(st.nextToken());
         k = Integer.parseInt(st.nextToken());
         arr = new int[100000 + 1];
-        Arrays.fill(arr, Integer.MAX_VALUE);
 
-        arr[n] = 0;
-        if(n == k) System.out.println(0);
-        else bfs(n, 0);
-        System.out.println(arr[m]);
+
     }
 
     public static void bfs(int cur, int time) {
