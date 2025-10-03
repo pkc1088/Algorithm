@@ -83,7 +83,6 @@ public class DataStructure {
         String z = String.valueOf(m);
         int[] arr = {1, 3, 2, 4};
         List<String> list1 = new ArrayList<>(Arrays.asList(p));
-
         List<String> list = new ArrayList<>();
         String[] newArr = list.toArray(new String[0]);
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
