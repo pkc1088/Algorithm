@@ -9,57 +9,26 @@ public class Main {
     static int[][] jobs = {{1, 3}, {2, 9}, {1, 4}, {5, 5}};
 
     public static int solution() {
-        // period 짧은것, request 작은 것, num 작은 것
-        // 음수면 앞에 위치함 (- 0 +)
-        PriorityQueue<Job> pq = new PriorityQueue<>(
-                (a,b) ->
-                    a.period == b.period
-                    ? (a.request == b.request
-                            ? a.num - b.num
-                            : a.request - b.request
-                    )
-                    : a.period - b.period
-        );
+        int[] cts = {3, 0, 6, 1, 5};
 
-        Arrays.sort(jobs, (a, b) -> a[0] == b[0] ? a[1] - b[1] : a[0] - b[0]);
-        // (1, 3)
-        // (1, 4)
-        // (2, 9)
-        // (5, 5)
+        Arrays.sort(cts, Comparator.reverseOrder());
+        //Arrays.sort(cts, Comparator.reverseOrder());
+        // 10 10 6 5 3 1 0
 
-        int k = 0;
-        for(int[] batch : jobs) {
-            pq.add(new Job(k++, batch[0], batch[1]));
-        }
-
-        int curTime = 0;
-        int[] avg = new int[jobs.length];
-
-        while(!pq.isEmpty()) {
-            Job job = pq.poll();
-            if(curTime < job.request) {
-                curTime = job.request;
+        for(int i = 0; i < cts.length; i++) {
+            int h = cts[i];
+            if(h <= i + 1) {
+                return h;
             }
-            curTime += job.period;
-            System.out.println("curTime: "+curTime);
-            avg[job.num] = curTime - job.request;
-            System.out.println("["+job.num+"]: "+ (curTime - job.request));
         }
 
-        int sum = 0;
-        for(int av : avg) {
-            sum += av;
-        }
-
-        System.out.println(sum/jobs.length);
-        return sum/jobs.length;
+        return 0;
     }
 
     public static class Job {
         int num;
         int request;
         int period;
-        int turn = 0;
 
         public Job(int num, int request, int period) {
             this.num = num;

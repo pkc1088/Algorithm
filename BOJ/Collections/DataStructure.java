@@ -33,6 +33,17 @@ public class DataStructure {
         }
 
     }
+
+    public static void StringRegrex() {
+        String text = "apple, banana. cherry";
+        String text2 = "[apple].ban ana,[cherry,date]";
+        String[] parts1 = text.split("[.,\\[\\]] | \\s+");
+        String[] parts2 = text.split("[.,\\[\\]]");
+
+        for (String part : parts1) System.out.println(part);
+
+    }
+
     public static void Collections() {
         Queue<Integer> q = new LinkedList<>();
         q.add(1);
