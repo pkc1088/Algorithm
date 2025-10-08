@@ -1,9 +1,67 @@
 package BOJ.BackTracking;
 
 import java.io.*;
-import java.util.StringTokenizer;
+import java.util.*;
 
 public class BOJ_14888 {
+
+    static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    static ArrayList<ArrayList<Integer>> graph = new ArrayList<>();
+    static StringTokenizer st;
+    static StringBuilder sb;
+    static List<Integer> list = new ArrayList<>();
+    static boolean[] visit;
+    static int[] arr, op;
+    static int[] dr = {1, -1, 0, 0};
+    static int[] dc = {0, 0, 1, -1};
+    static int numLen, m, e, v;
+    static int maxV = Integer.MIN_VALUE, minV = Integer.MAX_VALUE;
+    public static void main(String[] args) throws IOException {
+        numLen = Integer.parseInt(br.readLine());
+        arr = new int[numLen + 1];
+        visit = new boolean[5];
+        op = new int[5];
+
+        st = new StringTokenizer(br.readLine(), " ");
+        for (int i = 1; i < numLen + 1; i++) {
+            arr[i] = Integer.parseInt(st.nextToken());
+        }
+
+        st = new StringTokenizer(br.readLine(), " ");
+        for (int i = 1; i < 5; i++) {
+            op[i] = Integer.parseInt(st.nextToken());
+        }
+
+        if(numLen == 1) System.out.println(arr[1] + "\n" + arr[1]);
+
+        dfs(arr[1], 1, op[1], op[2], op[3], op[4]);
+        System.out.println(maxV + "\n" + minV);
+    }
+
+    public static void dfs(int value, int idx, int add, int mis, int mul, int div) {
+        if(idx + 1 > numLen || (add == 0 && mis == 0 && mul == 0 && div == 0)) {
+            if (maxV < value) maxV = value;
+            if (minV > value) minV = value;
+            return;
+        }
+
+        if(add > 0) {
+            dfs(value + arr[idx + 1], idx + 1, add - 1, mis, mul, div);
+        }
+        if(mis > 0) {
+            dfs(value - arr[idx + 1], idx + 1, add, mis - 1, mul, div);
+        }
+        if(mul > 0) {
+            dfs(value * arr[idx + 1], idx + 1, add, mis, mul - 1, div);
+        }
+        if(div > 0) {
+            dfs(value / arr[idx + 1], idx + 1, add, mis, mul, div - 1);
+        }
+
+    }
+}
+
+/*public class BOJ_14888 {
     static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     static StringBuilder sb = new StringBuilder();
@@ -49,7 +107,7 @@ public class BOJ_14888 {
             }
         }
     }
-}
+}*/
 
 /*
 package BOJ;

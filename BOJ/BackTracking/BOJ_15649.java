@@ -44,6 +44,58 @@ public class BOJ_15649 {
     }
 }
 
+/*
+public class Main {
+
+    static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    static ArrayList<ArrayList<Integer>> graph = new ArrayList<>();
+    static StringTokenizer st;
+    static StringBuilder sb;
+    static List<Integer> list = new ArrayList<>();
+    static boolean[] visit;
+    static int[] arr;
+    static int[] dr = {1, -1, 0, 0};
+    static int[] dc = {0, 0, 1, -1};
+    static int n, m, e, v;
+
+    public static void main(String[] args) throws IOException {
+        st = new StringTokenizer(br.readLine(), " ");
+        n = Integer.parseInt(st.nextToken());
+        m = Integer.parseInt(st.nextToken());
+        arr = new int[n + 1];
+        visit = new boolean[n + 1];
+
+        sb = new StringBuilder();
+        dfs(1);
+        System.out.println(sb);
+    }
+
+    public static void dfs(int pickedCount) {
+
+        if (pickedCount > m) {
+            for(int num : list) {
+                sb.append(num).append(" ");
+            }
+            sb.append("\n");
+            return;
+        }
+
+        for (int i = 1; i < n + 1; i++) {
+            if (!visit[i]) {
+                visit[i] = true;
+                list.add(i);
+                dfs(pickedCount + 1);
+                list.remove(list.get(list.size() - 1));
+                visit[i] = false;
+            }
+        }
+
+    }
+}
+ */
+
+
+
 //public class BOJ_15649 {
 //    static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 //    static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
