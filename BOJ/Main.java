@@ -1,7 +1,7 @@
 package BOJ;
 
 import java.util.*;
-import java.util.stream.Collectors;
+import java.util.stream.*;
 
 public class Main {
     public static void main(String[] args) {solution();}
@@ -11,7 +11,7 @@ public class Main {
     public static int solution() {
         int[] cts = {3, 0, 6, 1, 5};
 
-        Arrays.sort(cts, Comparator.reverseOrder());
+        Arrays.sort(cts);
         //Arrays.sort(cts, Comparator.reverseOrder());
         // 10 10 6 5 3 1 0
 

@@ -2,6 +2,7 @@ package BOJ.Collections;
 
 import java.util.*;
 import java.io.*;
+import java.util.stream.Collectors;
 
 public class DataStructure {
 //    static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -31,6 +32,17 @@ public class DataStructure {
         for(Integer i : list) {
             visit[i] = depth;
         }
+
+    }
+
+    public static void boxed() {
+        int[] arr = {1, 2, 3, 5};
+        Integer[] wrapperCts = Arrays.stream(arr).boxed().toArray(Integer[]::new);
+        Arrays.sort(wrapperCts, Comparator.reverseOrder());
+
+        int[] temp = Arrays.copyOfRange(arr, 0, 1);
+        Arrays.sort(temp);
+        System.out.println(Arrays.stream(temp).boxed().collect(Collectors.toList()));
 
     }
 
