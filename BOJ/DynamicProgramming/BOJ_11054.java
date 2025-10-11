@@ -3,8 +3,73 @@ package BOJ.DynamicProgramming;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.StringTokenizer;
 
+public class BOJ_11054 {
+
+    static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    static ArrayList<ArrayList<Integer>> graph = new ArrayList<>();
+    static StringTokenizer st;
+    static StringBuilder sb;
+    static List<Integer> list = new ArrayList<>();
+    static int[] team;
+    static boolean[] visit;
+    static int[] arr, brr, dp, dp2;
+    static int[] dr = {1, -1, 0, 0};
+    static int[] dc = {0, 0, 1, -1};
+    static int n, m, e, v;
+    static int maxV = Integer.MIN_VALUE, minV = Integer.MAX_VALUE;
+    public static void main(String[] args) throws IOException {
+
+        n = Integer.parseInt(br.readLine());
+        arr = new int[n];
+        brr = new int[n];
+        dp = new int[n];
+        dp2 = new int[n];
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        for (int i = 0; i < n; i++) {
+            int num = Integer.parseInt(st.nextToken());
+            arr[i] = brr[n - i - 1] = num;
+            dp[i] = dp2[i] = 1; // 최소 자기 자신 길이 1
+        }
+//        System.out.println(Arrays.stream(arr).boxed().collect(Collectors.toList()));
+//        System.out.println(Arrays.stream(brr).boxed().collect(Collectors.toList()));
+
+        int max = 1, max2 = 1;
+        for (int i = 1; i < n; i++) {
+            for (int j = 0; j < i; j++) {
+                if (arr[j] < arr[i]) {
+                    dp[i] = Math.max(dp[j] + 1, dp[i]);
+                }
+                if (brr[j] < brr[i]) {
+                    dp2[i] = Math.max(dp2[j] + 1, dp2[i]);
+                }
+            }
+            max = Math.max(max, dp[i]);
+            max2 = Math.max(max2, dp2[i]);
+        }
+
+//        for (int i = 0; i < n; i++) {
+//            System.out.print(dp[i] + " ");
+//        }
+//        System.out.println();
+//        // 1 2 5 4 3 4 1 2 5 1
+//        // 1 2 3 3 3 4 1
+//        for (int i = 0; i < n; i++) {
+//            System.out.print(dp2[i] + " ");
+//        }
+
+        int ans = -1;
+        for (int i = 0; i < n; i++) { // n = 10 / 6        i =  7 / 2
+            ans = Math.max(ans, dp[i] + dp2[n - i - 1] - 1);
+        }
+
+        System.out.println(ans);
+    }
+
+}
+/*
 public class BOJ_11054 {
     static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -82,7 +147,7 @@ public class BOJ_11054 {
 //        System.out.println();
 //    }
 }
-
+*/
 
 
 

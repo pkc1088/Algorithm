@@ -35,6 +35,31 @@ public class DataStructure {
 
     }
 
+    public static void binarySearch() {
+        int number = 10;
+        int number2 = 20;
+        String binaryString = Integer.toBinaryString(number); // num1 | num2
+        System.out.println(binaryString); // "1010"
+
+        // 반드시 오름차순으로 정렬되어 있어야 함
+        List<Integer> list = Arrays.asList(10, 20, 30, 40, 50);
+        // 찾는 값이 있는 경우
+        System.out.println(Collections.binarySearch(list, 30));
+        // 결과: 2 (30은 index 2에 있음)
+        // 찾는 값이 없는 경우
+        System.out.println(Collections.binarySearch(list, 25));
+        // 결과: -3
+        // 25를 넣으려면 인덱스 2에 들어가야 한다 (10, 20, 25, 30, 40, 50)
+        // 삽입 위치 2
+        // 반환값 공식 -(2) - 1 = -3
+        int idx = Collections.binarySearch(list, 25);
+        if (idx < 0) idx = -(idx + 1);  // idx = 2
+
+        List<String> list1 = Arrays.asList("apple", "banana", "cherry");
+        int idx1 = Collections.binarySearch(list1, "banana", Comparator.naturalOrder());
+        System.out.println(idx1); // 1
+    }
+
     public static void boxed() {
         int[] arr = {1, 2, 3, 5};
         Integer[] wrapperCts = Arrays.stream(arr).boxed().toArray(Integer[]::new);

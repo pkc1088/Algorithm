@@ -2,10 +2,7 @@ package BOJ.Hash;
 
 // "º£½ºÆ®¾Ù¹ü"
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class PG5 {
@@ -17,6 +14,7 @@ public class PG5 {
     public static int[] solution() {
         Map<String, Integer> genreSum = new HashMap<>();
         Map<String, List<int[]>> genreSongs = new HashMap<>(); // int[] = {index, playCount}
+        StringTokenizer st;
 
         for (int i = 0; i < genres.length; i++) {
             genreSum.put(genres[i], genreSum.getOrDefault(genres[i], 0) + plays[i]);
