@@ -110,7 +110,7 @@ public class DataStructure {
         System.out.println(list1);
         Collections.sort(list1);
         System.out.println(list1);
-        Collections.sort(list1, Comparator.reverseOrder());
+        list1.sort(Comparator.reverseOrder());
         System.out.println(list1);
 
         int[][] brr = {{2,7}, {3,5}, {1, 9}};

@@ -1,8 +1,8 @@
 package BOJ;
 
+import BOJ.Collections.DataStructureAnswer;
 import java.io.*;
 import java.util.*;
-import java.util.stream.*;
 
 public class Main {
 
@@ -18,15 +18,17 @@ public class Main {
     static int[] dc = {0, 0, 1, -1};
     static int n, m, e, v;
     static int maxV = Integer.MIN_VALUE, minV = Integer.MAX_VALUE;
+
     public static void main(String[] args) throws IOException {
-        Set<String> set = new HashSet<>();
-        Queue<String> q = new LinkedList<>();
-        HashSet<String> sets = new HashSet<>();
-        char[] result = new char[5];
-        result[0] = 'c';
-        result[1] = 'b';
-        String str = String.valueOf(result);
-        System.out.println(str);
+//        Set<String> set = new HashSet<>();
+//        Queue<String> q = new LinkedList<>();
+//        HashSet<String> sets = new HashSet<>();
+//        char[] result = new char[5];
+//        result[0] = 'c';
+//        result[1] = 'b';
+//        String str = String.valueOf(result);
+//        System.out.println(str);
+        DataStructureAnswer.Test();
     }
 
     public String[] solution(int n1, int[] arr1, int[] arr2) {
