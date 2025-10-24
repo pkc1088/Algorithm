@@ -11,6 +11,9 @@ public class DataStructureAnswer {
     }
 
     public static void Test() throws IOException {
+        ArrayList<Stack<Integer>> arrStk = new ArrayList<>();
+        for(int i = 0; i < 1; i++) arrStk.add(new Stack<Integer>());
+        arrStk.get(0).push(1);
         // 1차원 배열 선언
         int[] arr = new int[10];
         // -1로 arr 채우기
@@ -46,7 +49,7 @@ public class DataStructureAnswer {
         // 맵 <String, Integer>
         Map<String, Integer> map = new HashMap<>();
         // 추가 2가지 버전
-        map.put("banana", map.getOrDefault(1, 0));
+        map.put("banana", map.getOrDefault("banana", 0));
         map.put("strawberry", 2);
         // 맵에서 키와 값 추출
         for(String s : map.keySet()) map.get(s);
@@ -60,7 +63,11 @@ public class DataStructureAnswer {
         // Alice 키 없으면 새로운 리스트 생성 후 값으로 문자열 넣기, 키 이미 존재하면 기존 list 반환
         String student = "Alice";
         List<String> aliceCourses1 = groups.computeIfAbsent(student, k -> new ArrayList<>());
-
+        // 디큐
+        Deque<String> dq = new ArrayDeque<>();
+        // 앞쪽 추가/제거, 뒤쪽 추가/제거
+        dq.addFirst("B"); dq.addLast("C");
+        dq.pollFirst(); dq.pollLast();
 
         // arr -> Integer[]
         Integer[] wrappedArray = Arrays.stream(arr).boxed().toArray(Integer[]::new);
@@ -71,6 +78,7 @@ public class DataStructureAnswer {
         // list -> arr
         arr = list.stream().mapToInt(i->i).toArray();
         // Integer[] -> list
+        list = Arrays.stream(wrappedArray).collect(Collectors.toList());
         List<Integer> list2 = new ArrayList<>(Arrays.asList(wrappedArray));
         // list -> Integer[]
         Integer[] newArr = list.toArray(new Integer[0]);
@@ -108,6 +116,9 @@ public class DataStructureAnswer {
         // BR, BW
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        // StringTokenizer
+        StringTokenizer st = new StringTokenizer(str, " ");
+        if(st.hasMoreTokens()) st.nextToken();
 
     }
 }

@@ -1,6 +1,8 @@
 package BOJ;
 
 import BOJ.Collections.DataStructureAnswer;
+import BOJ.Collections.DataStructureTest;
+
 import java.io.*;
 import java.util.*;
 
@@ -28,7 +30,7 @@ public class Main {
 //        result[1] = 'b';
 //        String str = String.valueOf(result);
 //        System.out.println(str);
-        DataStructureAnswer.Test();
+        DataStructureTest.Test();
     }
 
     public String[] solution(int n1, int[] arr1, int[] arr2) {

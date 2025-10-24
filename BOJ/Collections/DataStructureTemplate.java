@@ -18,6 +18,8 @@ public class DataStructureTemplate {
         // 정수 리스트 선언(list)
         // 정수 그래프 선언
         // 그래프 10만큼 초기화
+
+
         // 큐
         // 비었는지 확인 후 추가 및 제거
         // 힙 초기화 + 역정렬
@@ -32,18 +34,26 @@ public class DataStructureTemplate {
         // 맵에서 특정 키 확인하고 변경 하거나 제거
         // 맵 <String, List<String>>
         // Alice 키 없으면 새로운 리스트 생성 후 값으로 문자열 넣기, 키 이미 존재하면 기존 list 반환
+        // 디큐
+        // 앞쪽 추가/제거, 뒤쪽 추가/제거
+
+
         // arr -> Integer[]
         // Integer[] -> arr
         // arr -> list
         // list -> arr
         // Integer[] -> list
         // list -> Integer[]
+
+
         // Integer[] 역정렬
         // int[] arr 정렬
         // int[] arr 역정렬
         // List 역정렬 세 가지
         // 2차원 두 번째 요소로 오름차순 정렬
         // 2차원 첫 요소로 내림차순, 두번째 요소로 오름차순 정렬
+
+
         // 문자열 str 선언과 substr 0~3
         // 문자열 배열 나누기
         // 문자열 배열 나누기 정규식
@@ -53,5 +63,6 @@ public class DataStructureTemplate {
         // String[] -> List<String>
         // List<String> -> String[]
         // BR, BW
+        // StringTokenizer, 토큰 존재 여부 및 다음 토큰
     }
 }
