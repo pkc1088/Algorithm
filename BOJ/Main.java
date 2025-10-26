@@ -31,6 +31,8 @@ public class Main {
 //        String str = String.valueOf(result);
 //        System.out.println(str);
         DataStructureTest.Test();
+        Map<Integer, int[]> map = new HashMap<>();
+        map.put(1, new int[]{0,0});
     }
 
     public String[] solution(int n1, int[] arr1, int[] arr2) {

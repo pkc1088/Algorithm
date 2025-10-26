@@ -32,7 +32,8 @@ public class DataStructure {
         for(Integer i : list) {
             visit[i] = depth;
         }
-
+        String str = "dwd";
+        str.split("\\.");
     }
 
     public static void binarySearch() {
