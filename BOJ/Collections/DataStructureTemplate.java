@@ -52,7 +52,7 @@ public class DataStructureTemplate {
         // List 역정렬 세 가지
         // 2차원 두 번째 요소로 오름차순 정렬
         // 2차원 첫 요소로 내림차순, 두번째 요소로 오름차순 정렬
-
+        // 1차원 순서 배열을 double 배열의 크기 순으로 정렬
 
         // 문자열 str 선언과 substr 0~3
         // 문자열 배열 나누기

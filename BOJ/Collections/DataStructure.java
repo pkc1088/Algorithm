@@ -34,6 +34,9 @@ public class DataStructure {
         }
         String str = "dwd";
         str.split("\\.");
+        do {
+            System.out.println();
+        } while(false);
     }
 
     public static void binarySearch() {

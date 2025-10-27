@@ -100,6 +100,17 @@ public class DataStructureAnswer {
         Arrays.sort(arr2, (a, b) -> a[1] - b[1]);
         // 2차원 첫 요소로 내림차순, 두번째 요소로 오름차순 정렬
         Arrays.sort(arr2, (a, b) -> a[0] == b[0] ? a[1] - b[1] : b[0] - a[0]);
+        // 1차원 순서 배열을 double 배열의 크기 순으로 정렬
+        Integer[] stagesIdx = new Integer[10];
+        double[] fail = new double[10 + 1];
+
+        for (int i = 0; i <10; i++)
+            stagesIdx[i] = i + 1;
+
+        Arrays.sort(stagesIdx, (a, b) -> {
+            if (fail[b] == fail[a]) return Integer.compare(a, b); // 실패율 같으면 작은 번호 우선
+            return Double.compare(fail[b], fail[a]); // 실패율 큰 순
+        });
         // 문자열 str 선언과 substr 0~3
         String str = "1234";
         String substr = str.substring(0,3);
