@@ -11,9 +11,6 @@ public class DataStructureAnswer {
     }
 
     public static void Test() throws IOException {
-        ArrayList<Stack<Integer>> arrStk = new ArrayList<>();
-        for(int i = 0; i < 1; i++) arrStk.add(new Stack<Integer>());
-        arrStk.get(0).push(1);
         // 1차원 배열 선언
         int[] arr = new int[10];
         // -1로 arr 채우기
@@ -71,17 +68,18 @@ public class DataStructureAnswer {
 
         // arr -> Integer[]
         Integer[] wrappedArray = Arrays.stream(arr).boxed().toArray(Integer[]::new);
+        // list -> Integer[]
+        Integer[] newArr = list.toArray(new Integer[0]); // list.toArray(Integer[]::new);
         // Integer[] -> arr
         arr = Arrays.stream(wrappedArray).mapToInt(i->i).toArray();
-        // arr -> list
-        list = Arrays.stream(arr).boxed().collect(Collectors.toList());
         // list -> arr
         arr = list.stream().mapToInt(i->i).toArray();
+        // arr -> list
+        list = Arrays.stream(arr).boxed().collect(Collectors.toList());
         // Integer[] -> list
         list = Arrays.stream(wrappedArray).collect(Collectors.toList());
         List<Integer> list2 = new ArrayList<>(Arrays.asList(wrappedArray));
-        // list -> Integer[]
-        Integer[] newArr = list.toArray(new Integer[0]);
+
 
 
         // Integer[] 역정렬
@@ -95,6 +93,7 @@ public class DataStructureAnswer {
         // List 역정렬 세 가지
         Collections.reverse(list2);
         Collections.sort(list2, Comparator.reverseOrder());
+        Collections.sort(list2, Collections.reverseOrder());
         list2.sort(Comparator.reverseOrder());
         // 2차원 두 번째 요소로 오름차순 정렬
         Arrays.sort(arr2, (a, b) -> a[1] - b[1]);
@@ -103,14 +102,14 @@ public class DataStructureAnswer {
         // 1차원 순서 배열을 double 배열의 크기 순으로 정렬
         Integer[] stagesIdx = new Integer[10];
         double[] fail = new double[10 + 1];
-
-        for (int i = 0; i <10; i++)
-            stagesIdx[i] = i + 1;
+        for (int i = 0; i < 10; i++) stagesIdx[i] = i + 1;
 
         Arrays.sort(stagesIdx, (a, b) -> {
-            if (fail[b] == fail[a]) return Integer.compare(a, b); // 실패율 같으면 작은 번호 우선
+            if (fail[a] == fail[b]) return Integer.compare(a, b); // 실패율 같으면 작은 번호 우선
             return Double.compare(fail[b], fail[a]); // 실패율 큰 순
         });
+
+
         // 문자열 str 선언과 substr 0~3
         String str = "1234";
         String substr = str.substring(0,3);

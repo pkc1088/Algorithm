@@ -39,11 +39,11 @@ public class DataStructureTemplate {
 
 
         // arr -> Integer[]
-        // Integer[] -> arr
-        // arr -> list
-        // list -> arr
-        // Integer[] -> list
         // list -> Integer[]
+        // Integer[] -> arr
+        // list -> arr
+        // arr -> list
+        // Integer[] -> list
 
 
         // Integer[] ¿ªÁ¤·Ä
