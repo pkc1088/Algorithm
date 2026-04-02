@@ -38,17 +38,18 @@ public class DataStructureTemplate {
         // 앞쪽 추가/제거, 뒤쪽 추가/제거
 
 
-        // arr -> Integer[]
-        // list -> Integer[]
-        // Integer[] -> arr
-        // list -> arr
-        // arr -> list
-        // Integer[] -> list
+        // int[] -> Integer[]
+        // List<Integer> -> Integer[]
+        // Integer[] -> int[]
+        // List<Integer> -> int[]
+        // int[] -> List<Integer>
+        // Integer[] -> List<Integer>
 
 
         // Integer[] 역정렬
         // int[] arr 정렬
         // int[] arr 역정렬
+        // List 뒤집기
         // List 역정렬 세 가지
         // 2차원 두 번째 요소로 오름차순 정렬
         // 2차원 첫 요소로 내림차순, 두번째 요소로 오름차순 정렬

@@ -60,21 +60,22 @@ public class DataStructureAnswer {
         // Alice 키 없으면 새로운 리스트 생성 후 값으로 문자열 넣기, 키 이미 존재하면 기존 list 반환
         String student = "Alice";
         List<String> aliceCourses1 = groups.computeIfAbsent(student, k -> new ArrayList<>());
+        groups.computeIfAbsent(student, k -> new ArrayList<>()).add("java");
         // 디큐
         Deque<String> dq = new ArrayDeque<>();
         // 앞쪽 추가/제거, 뒤쪽 추가/제거
         dq.addFirst("B"); dq.addLast("C");
         dq.pollFirst(); dq.pollLast();
 
-        // arr -> Integer[]
+        // int[] -> Integer[]
         Integer[] wrappedArray = Arrays.stream(arr).boxed().toArray(Integer[]::new);
         // list -> Integer[]
         Integer[] newArr = list.toArray(new Integer[0]); // list.toArray(Integer[]::new);
-        // Integer[] -> arr
+        // Integer[] -> int[]
         arr = Arrays.stream(wrappedArray).mapToInt(i->i).toArray();
-        // list -> arr
+        // list -> int[]
         arr = list.stream().mapToInt(i->i).toArray();
-        // arr -> list
+        // int[] -> list
         list = Arrays.stream(arr).boxed().collect(Collectors.toList());
         // Integer[] -> list
         list = Arrays.stream(wrappedArray).collect(Collectors.toList());
@@ -90,8 +91,9 @@ public class DataStructureAnswer {
             // arr -> Integer[]
             // Integer[] 역정렬
             // 이건 그냥 for 문 쓰는게 나을 듯
-        // List 역정렬 세 가지
+        // List 뒤집기
         Collections.reverse(list2);
+        // List 역정렬 세 가지
         Collections.sort(list2, Comparator.reverseOrder());
         Collections.sort(list2, Collections.reverseOrder());
         list2.sort(Comparator.reverseOrder());
@@ -123,6 +125,11 @@ public class DataStructureAnswer {
         // 파싱 int 와 str
         int k = Integer.parseInt(str);
         String str2 = String.valueOf(k);
+        // String[] -> List<String>
+        List<String> newlist = new ArrayList<>(Arrays.asList(p));
+        // List<String> -> String[]
+        String[] array = newlist.toArray(String[]::new);
+
         // BR, BW
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
