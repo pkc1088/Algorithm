@@ -68,23 +68,23 @@ public class DataStructureAnswer {
         dq.pollFirst(); dq.pollLast();
 
         // int[] -> Integer[]
-        Integer[] wrappedArray = Arrays.stream(arr).boxed().toArray(Integer[]::new);
+        Integer[] integerArray = Arrays.stream(arr).boxed().toArray(Integer[]::new);
         // list -> Integer[]
-        Integer[] newArr = list.toArray(new Integer[0]); // list.toArray(Integer[]::new);
+        Integer[] integerArray2 = list.toArray(Integer[]::new); // new Integer[0]
         // Integer[] -> int[]
-        arr = Arrays.stream(wrappedArray).mapToInt(i->i).toArray();
+        int[] intArr = Arrays.stream(integerArray).mapToInt(i->i).toArray();
         // list -> int[]
-        arr = list.stream().mapToInt(i->i).toArray();
+        int[] intArr2 = list.stream().mapToInt(i->i).toArray();
         // int[] -> list
-        list = Arrays.stream(arr).boxed().collect(Collectors.toList());
+        List<Integer> integerList = Arrays.stream(arr).boxed().toList(); //.collect(Collectors.toList());
         // Integer[] -> list
-        list = Arrays.stream(wrappedArray).collect(Collectors.toList());
-        List<Integer> list2 = new ArrayList<>(Arrays.asList(wrappedArray));
+        List<Integer> integerList2 = Arrays.stream(integerArray).toList(); //.collect(Collectors.toList());
+        List<Integer> integerList3 = new ArrayList<>(Arrays.asList(integerArray));
 
 
 
         // Integer[] 역정렬
-        Arrays.sort(wrappedArray, Comparator.reverseOrder());
+        Arrays.sort(integerArray, Comparator.reverseOrder());
         // int[] arr 정렬
         Arrays.sort(arr);
         // int[] arr 역정렬
@@ -92,21 +92,21 @@ public class DataStructureAnswer {
             // Integer[] 역정렬
             // 이건 그냥 for 문 쓰는게 나을 듯
         // List 뒤집기
-        Collections.reverse(list2);
+        Collections.reverse(integerList);
         // List 역정렬 세 가지
-        Collections.sort(list2, Comparator.reverseOrder());
-        Collections.sort(list2, Collections.reverseOrder());
-        list2.sort(Comparator.reverseOrder());
+        Collections.sort(integerList, Comparator.reverseOrder());
+        Collections.sort(integerList, Collections.reverseOrder());
+        integerList.sort(Comparator.reverseOrder());
         // 2차원 두 번째 요소로 오름차순 정렬
         Arrays.sort(arr2, (a, b) -> a[1] - b[1]);
         // 2차원 첫 요소로 내림차순, 두번째 요소로 오름차순 정렬
         Arrays.sort(arr2, (a, b) -> a[0] == b[0] ? a[1] - b[1] : b[0] - a[0]);
-        // 1차원 순서 배열을 double 배열의 크기 순으로 정렬
-        Integer[] stagesIdx = new Integer[10];
-        double[] fail = new double[10 + 1];
-        for (int i = 0; i < 10; i++) stagesIdx[i] = i + 1;
+        // 1차원 순서 배열(stages)을 double 배열(fail)의 크기 순으로 정렬(실패율 큰 순, 실패율 같으면 작은 번호 우선)
+        Integer[] stages = new Integer[10];
+        for (int i = 0; i < 10; i++) stages[i] = i + 1;
+        double[] fail = new double[11];
 
-        Arrays.sort(stagesIdx, (a, b) -> {
+        Arrays.sort(stages, (a, b) -> {
             if (fail[a] == fail[b]) return Integer.compare(a, b); // 실패율 같으면 작은 번호 우선
             return Double.compare(fail[b], fail[a]); // 실패율 큰 순
         });
@@ -122,14 +122,15 @@ public class DataStructureAnswer {
         String text2 = "[apple].ban ana,[cherry,date]";
         String[] parts1 = text.split("[.,\\[\\]] | \\s+");
         String[] parts2 = text.split("[.,\\[\\]]");
+        String[] reg = text.split("[,.]");
         // 파싱 int 와 str
         int k = Integer.parseInt(str);
         String str2 = String.valueOf(k);
         // String[] -> List<String>
         List<String> newlist = new ArrayList<>(Arrays.asList(p));
-        // List<String> -> String[]
+        // List<String> -> String[], 그 후 출력
         String[] array = newlist.toArray(String[]::new);
-
+        System.out.println(Arrays.toString(array));
         // BR, BW
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));

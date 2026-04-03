@@ -53,7 +53,10 @@ public class DataStructureTemplate {
         // List 역정렬 세 가지
         // 2차원 두 번째 요소로 오름차순 정렬
         // 2차원 첫 요소로 내림차순, 두번째 요소로 오름차순 정렬
-        // 1차원 순서 배열을 double 배열의 크기 순으로 정렬
+        // 1차원 순서 배열(stages)을 double 배열(fail)의 크기 순으로 정렬(실패율 큰 순, 실패율 같으면 작은 번호 우선)
+        Integer[] stages = new Integer[10];
+        for (int i = 0; i < 10; i++) stages[i] = i + 1;
+        double[] fail = new double[11];
 
         // 문자열 str 선언과 substr 0~3
         // 문자열 배열 나누기
@@ -62,7 +65,7 @@ public class DataStructureTemplate {
         String text2 = "[apple].ban ana,[cherry,date]";
         // 파싱 int 와 str
         // String[] -> List<String>
-        // List<String> -> String[]
+        // List<String> -> String[], 그 후 출력
         // BR, BW
         // StringTokenizer, 토큰 존재 여부 및 다음 토큰
     }
