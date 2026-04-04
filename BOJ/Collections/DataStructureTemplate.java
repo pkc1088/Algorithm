@@ -23,6 +23,7 @@ public class DataStructureTemplate {
         // 큐
         // 비었는지 확인 후 추가 및 제거
         // 힙 초기화 + 역정렬
+        // 힙 초기화 int[] + 두번째 요소 보고 오른차순 정렬
         // 스택
         // 추가 및 제거
         // 셋

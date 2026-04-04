@@ -35,6 +35,8 @@ public class DataStructureAnswer {
         if(!q.isEmpty()) { q.add(1); q.offer(2); q.poll(); }
         // 힙 초기화 + 역정렬
         PriorityQueue<Integer> pq = new PriorityQueue<>(Comparator.reverseOrder());
+        // 힙 초기화 int[] + 두번째 요소 보고 오른차순 정렬
+        PriorityQueue<int[]> pq2 = new PriorityQueue<>((a, b) -> a[1] - b[1]);
         // 스택
         Stack<Integer> stk = new Stack<>();
         // 추가 및 제거

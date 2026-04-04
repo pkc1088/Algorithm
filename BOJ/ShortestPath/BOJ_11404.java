@@ -51,8 +51,11 @@ public class BOJ_11404 {
             dist[from][to] = Math.min(dist[from][to], weight);
         }
 
+        // 거쳐가는 노드 (가장 바깥쪽 루프) : 순서 중요
         for (int l = 1; l < city + 1; l++) {
+            // 출발 노드
             for (int i = 1; i < city + 1; i++) {
+                // 도착 노드
                 for (int j = 1; j < city + 1; j++) {
                     if(dist[i][j] > dist[i][l] + dist[l][j]) {
                         dist[i][j] = dist[i][l] + dist[l][j];
