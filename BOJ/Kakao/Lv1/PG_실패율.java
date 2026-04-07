@@ -30,6 +30,7 @@ public class PG_실패율 {
             return Double.compare(fail[b], fail[a]); // 실패율 큰 순
         });
 
+//          아랫것 쓰면 X
 //         Arrays.sort(stagesIdx, (a, b) -> (fail[a] == fail[b])
 //                         ? b-a
 //                         : ( (fail[a] > fail[b]) ? a-b : b-a)

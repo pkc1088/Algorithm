@@ -21,14 +21,13 @@ public class DataStructureAnswer {
         for(int i = 0; i < arr.length; i++) arr2[i] = arr.clone();
         // 0 <= arr 인덱스 < 1 만큼 brr 로 복사
         int[] brr = Arrays.copyOfRange(arr, 0, 1);
-        // 리스트 선언
+        // 리스트 선언, 추가/삭제
         List<Integer> list = new ArrayList<>();
+        list.add(5); list.remove(Integer.valueOf(5));
         // 그래프 선언
         ArrayList<ArrayList<Integer>> graph = new ArrayList<>();
         // 그래프 10만큼 초기화
         for(int i = 0; i < 10; i++) graph.add(new ArrayList<>());
-
-
         // 큐
         Queue<Integer> q = new LinkedList<>();
         // 비었는지 확인 후 추가 및 제거
@@ -44,14 +43,20 @@ public class DataStructureAnswer {
         // 셋
         Set<Integer> set = new HashSet<>();
         // 4 포함하는지 체크 후 4 추가
-        if(!set.contains(4)) { set.add(4); }
+        if(!set.contains(4)) { set.add(4); set.remove(4); }
         // 맵 <String, Integer>
         Map<String, Integer> map = new HashMap<>();
         // 추가 2가지 버전
         map.put("banana", map.getOrDefault("banana", 0));
         map.put("strawberry", 2);
-        // 맵에서 키와 값 추출
-        for(String s : map.keySet()) map.get(s);
+        // 맵에서 키와 값 추출 2가지
+        for(String s : map.keySet()) {
+            map.get(s);
+        }
+        for (Map.Entry<String, Integer> entry : map.entrySet()) {
+            String key = entry.getKey();
+            Integer value = entry.getValue();
+        }
         // 키가 존재하지 않을 때만 새로운 값을 계산하여 Map 에 추가하고 그 값을 반환
         map.computeIfAbsent("apple", k -> 1);
         // 맵에서 특정 키 확인하고 변경 하거나 제거
@@ -66,7 +71,7 @@ public class DataStructureAnswer {
         // 디큐
         Deque<String> dq = new ArrayDeque<>();
         // 앞쪽 추가/제거, 뒤쪽 추가/제거
-        dq.addFirst("B"); dq.addLast("C");
+        dq.addFirst("B"); dq.addLast("C"); dq.offerFirst("f");
         dq.pollFirst(); dq.pollLast();
 
         // int[] -> Integer[]

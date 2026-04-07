@@ -16,6 +16,7 @@ public class DataStructureTemplate {
         // arr2에 arr로 복사하기
         // 0 <= arr 인덱스 < 1 만큼 brr 로 복사
         // 정수 리스트 선언(list)
+        // 리스트 선언, 추가/삭제
         // 정수 그래프 선언
         // 그래프 10만큼 초기화
 
@@ -30,7 +31,7 @@ public class DataStructureTemplate {
         // 4 포함하는지 체크 후 4 추가
         // 맵 <String, Integer>
         // 추가 2가지 버전
-        // 맵에서 키와 값 추출
+        // 맵에서 키와 값 추출 2가지
         // 키가 존재하지 않을 때만 새로운 값을 계산하여 Map 에 추가하고 그 값을 반환
         // 맵에서 특정 키 확인하고 변경 하거나 제거
         // 맵 <String, List<String>>
